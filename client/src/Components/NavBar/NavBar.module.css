@@ -1,0 +1,11 @@
+.homeIcon {
+    width: 50px;
+}
+
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0pc;
+    padding: 10px 20px;
+}

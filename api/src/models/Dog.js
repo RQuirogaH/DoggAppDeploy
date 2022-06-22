@@ -5,17 +5,15 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('dog', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       unique: true,
-      autoIncrement: true,
       primaryKey: true,
-/*       get() {
-        return this.getDataValue('id') + '_db'
-      } */
+      defaultValue: DataTypes.UUIDV4, 
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     height: {
       type: DataTypes.FLOAT,
