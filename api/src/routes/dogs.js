@@ -53,7 +53,7 @@ router.get('/', async (req,res) => {
         res.json(response)
     }
     catch(err) {
-        res.json({msg: 'Ocurrió un error intentelo de nuevo'})
+        res.json({msg: 'Ocurrió un error con los datos ingresados', err: err.message})
     }
 })
 
@@ -83,7 +83,7 @@ router.get('/:idRaza', async (req, res) => {
         res.json(response)
     }    
     catch(err) {
-        res.json({msg: 'Ocurrió un error con los datos ingresados'})
+        res.json({msg: 'Ocurrió un error con los datos ingresados', err: err.message})
     }
 })
 
@@ -130,7 +130,7 @@ router.post('/', async (req, res) => {
         res.json(breedCrated)
     }
     catch(err) {
-        res.json({msg: 'Ocurrió un error con los datos ingresados'})
+        res.json({msg: 'Ocurrió un error con los datos ingresados', err: err.message})
     }
 
 })

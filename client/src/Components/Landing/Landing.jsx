@@ -1,8 +1,10 @@
 import React from "react";
-import s from './Landing.module.css';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
-const Landing = () => {
+import s from './Landing.module.css';
+
+const Landing = (props) => {
+
     return (
         <div className={s.bg}>
             <div className={s.main}>

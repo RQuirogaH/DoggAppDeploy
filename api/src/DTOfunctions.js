@@ -5,10 +5,10 @@ let dtoAPI = (data) => {
             id: b.id,
             name: b.name,
             weight: b.weight.metric,
-            height: b.weight.metric,
+            height: b.height.metric,
             life_span: b.life_span,
-            temperament: b.temperament,
-            img: b.reference_image_id,
+            temperament: b.temperament?.split(', '),
+            img: b.image.url,
         })
     })
     return dataDTO
@@ -23,7 +23,7 @@ let dtoDB = (data) => {
             weight: b.weight,
             height: b.weight,
             life_span: b.life_span,
-            temperament: b.temperaments.map(e => e.name).join(', '),
+            temperament: b.temperaments.map(e => e.name),
         })
     })
     return dataDTO

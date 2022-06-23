@@ -1,0 +1,22 @@
+.container {
+    position: relative;
+    min-height: 100vh;
+    background: transparent;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-image: url('../../Assets/bg_main4.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+    opacity: 1;
+}

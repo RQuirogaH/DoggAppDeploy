@@ -1,18 +1,18 @@
-import { GET_CITY } from './actions';
+import { GET_BREEDS, GET_TEMPERS } from './actions';
 
 
 const initialState = {
-    city: {},
-    cities: [],
-    favCities: []
+    breeds: [],
+    breedsFilter: [],
+    loading: false
 }
 
 function reducer(state = initialState, action) {
     switch(action.type) {
-        case GET_CITY:
+        case GET_BREEDS:
             return {
                 ...state,
-                city: action.payload
+                breeds: action.payload
             }
 
         default:

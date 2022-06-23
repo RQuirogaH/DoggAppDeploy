@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+@import url('../../vars.css');
 
 .bg {
     background-image: url('../../Assets/bg_landing.jpg');
@@ -21,8 +21,8 @@
 }
 
 .title {
-    font-family: 'Dancing Script', cursive;
-    color: goldenrod;
+    font-family: var(--font_cursive);
+    color: var(--color_golden);
     font-size: 125px;
     padding: 0px;
     margin: 0px;
