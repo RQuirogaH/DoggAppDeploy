@@ -1,0 +1,60 @@
+@import url('../../vars.css');
+
+.form{
+    position: relative;
+    box-sizing: border-box;
+    width: 200px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px var(--color_golden) solid;
+    border-radius: 20px;
+    margin: 0px;
+    padding: 10px 7px;
+
+}
+
+.input {
+
+    box-sizing: border-box;
+    width: 150px;
+    margin: 0px;
+    margin-left: 7px;
+
+    background-color: transparent;
+    border: none;
+    color: var(--color_golden);
+    outline: none;
+
+    font-size: 15px;
+}
+
+.boton {
+    background-color: transparent;
+    cursor: pointer;
+    
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+    margin: 0px;
+    
+    display: flex;
+    align-items: center;
+
+    border: none;
+    background-color: var(--color_golden);
+    border-radius: 15px;
+}
+
+.img {
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+    margin: 0px;
+    border: none;
+    display: flex;
+    align-items: center;
+}

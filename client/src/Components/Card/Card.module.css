@@ -3,31 +3,55 @@
 .container {
     position: relative;
     width: 300px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgb(27, 27, 27);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 10px;
     padding: 10px;
     color: white;
-    border: 1px rgba(255, 255, 255, 0.7) solid;
+    border: 1px rgba(255, 255, 255, 0.2) solid;
     border-radius: 10px;
 }
 
 .img {
-    min-height: 30vh;
+    height: 35vh;
     width: 100%;
     border-radius: 10px;
+    margin: 0px;
 }
 
 .breedName {
+    text-decoration: none;
     font-family: var(--font_cursive);
     color: var(--color_golden);
     font-size: 30px;
     text-align: center;
 }
 
+.breedName:hover {
+    text-decoration: underline;
+}
+
+
+
 .span {
    font-weight: 800;
+}
+
+.temperaments{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.temperaments > span {
+    border: 1px solid var(--color_golden);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 3px;
+    font-size: 12px;
 }

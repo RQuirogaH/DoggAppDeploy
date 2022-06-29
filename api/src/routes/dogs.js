@@ -50,6 +50,14 @@ router.get('/', async (req,res) => {
             response = response.filter(b => b.name.toLowerCase().includes(name.toLowerCase()))
         }
 
+        response.sort(function(a,b) {
+            let aLowerCase = a.name.toLowerCase();
+            let bLowerCase = b.name.toLowerCase();
+            if(aLowerCase < bLowerCase) return -1
+            if(aLowerCase > bLowerCase) return 1
+            return 0
+        });
+
         res.json(response)
     }
     catch(err) {
@@ -88,7 +96,7 @@ router.get('/:idRaza', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const {name, height, weight, life_span, temperaments} = req.body;
+    const {name, height, weight, life_span, temperaments, img} = req.body;
     try {
 
         let [newBreed,created] = await Dog.findOrCreate({
@@ -97,7 +105,8 @@ router.post('/', async (req, res) => {
                 name,
                 height,
                 weight,
-                life_span
+                life_span,
+                img
             }
         })
 

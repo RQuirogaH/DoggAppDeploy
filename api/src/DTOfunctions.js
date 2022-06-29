@@ -24,6 +24,7 @@ let dtoDB = (data) => {
             height: b.weight,
             life_span: b.life_span,
             temperament: b.temperaments.map(e => e.name),
+            img: b.img
         })
     })
     return dataDTO
