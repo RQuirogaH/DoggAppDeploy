@@ -21,10 +21,10 @@ function App() {
         <Route path='/breed/:id'>
           <BreedDetail />
         </Route>
-        <Route>
+        <Route path='/about'>
           <About />
         </Route>
-        <Route>
+        <Route path='/create'>
           <Create />
         </Route>
       </Switch>

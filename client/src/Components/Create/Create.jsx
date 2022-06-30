@@ -4,7 +4,10 @@ import s from './Create.module.css';
 
 const Create = () => {
     return (
-        <NavBar/>
+        <div className={s.container}>
+            <NavBar/>
+            Aqui se crea
+        </div>
     )
 }
 

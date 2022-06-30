@@ -1,3 +1,5 @@
+@import url('../../vars.css');
+
 .container {
     position: relative;
     min-height: 100vh;
@@ -19,4 +21,104 @@
     background-repeat: repeat;
     background-position: center;
     opacity: 1;
+}
+
+.detail {
+    position: relative;
+    width: 100%;
+    height: 89vh;
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.breed {
+    border: solid 1px rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    max-height: 70vh;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: row;
+    background: rgb(27, 27, 27);
+}
+
+.breed img {
+    max-height: 70vh;
+    max-width: 50vw;
+    min-width: 10vw;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.info {
+    padding: 20px;
+    padding-right: 40px;
+    max-width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.info h3 {
+    font-family: var(--font_cursive);
+    color: var(--color_golden);
+    font-size: 40px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.text span {
+    font-weight: 700;
+    color: var(--color_golden);
+}
+
+.temperaments{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.temperaments > span {
+    border: 1px solid var(--color_golden);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 3px;
+    font-size: 12px;
+}
+
+.boton {
+    background-color: var(--color_golden);
+    margin-top: 10px;
+    width: 8vw;
+    height: 5vh;
+    text-align: center;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px goldenrod solid;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.boton:hover{
+    border: none;
+    background-color: rgba(218, 165, 32, 0.616);
+}
+
+.message {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
 }

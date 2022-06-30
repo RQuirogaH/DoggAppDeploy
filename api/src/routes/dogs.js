@@ -58,7 +58,11 @@ router.get('/', async (req,res) => {
             return 0
         });
 
-        res.json(response)
+        if(!response.length) {
+            return res.json({status: 'OK', data: response})
+        }
+
+        res.json({status: 'OK', data: response})
     }
     catch(err) {
         res.json({msg: 'Ocurrió un error con los datos ingresados', err: err.message})
@@ -73,9 +77,11 @@ router.get('/:idRaza', async (req, res) => {
             const breed = await Dog.findByPk(id)
     
             if(!breed){
-                return res.json({msg: 'No existe la raza que estás buscando'})
+                return res.json([{err: 'No existe la raza que estás buscando'}])
             }
-    
+            
+            breed = dtoDB(breed)
+
             return res.json(breed)
         }
     
@@ -85,9 +91,11 @@ router.get('/:idRaza', async (req, res) => {
         response = response.filter(b => b.id === parseInt(id))
     
         if(!response.length){
-            return res.json({msg: 'No existe la raza que estás buscando'})
+            return res.json([{err: 'No existe la raza que estás buscando'}])
         }
-    
+        
+        response = dtoAPI(response)
+        
         res.json(response)
     }    
     catch(err) {

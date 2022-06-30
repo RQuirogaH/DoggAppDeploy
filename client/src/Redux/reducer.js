@@ -1,17 +1,16 @@
-import {GET_BREEDS, 
-        GET_BREEDS_BY_NAME, 
-        GET_TEMPERS, 
-        ORDER_BREEDS, 
-        FILTER_TEMP, 
-        FILTER_ORIGIN, 
-        GET_BREED_DETAIL 
-    } from './actions';
+import {
+    GET_BREEDS,
+    GET_BREEDS_BY_NAME,
+    GET_TEMPERS,
+    ORDER_BREEDS,
+    FILTER_TEMP,
+    FILTER_ORIGIN,
+} from './actions';
 
 
 const initialState = {
     breeds: [],
-    breedsFilter: [],
-    breedDetail: [],
+    breedsFilter: { status: 'loading', data: [] },
     temperaments: [],
     loading: false
 }
@@ -21,23 +20,16 @@ function reducer(state = initialState, action) {
         case GET_BREEDS:
             return {
                 ...state,
-                breeds: action.payload,
+                breeds: action.payload.data,
                 breedsFilter: action.payload
             }
-            
+
         case GET_BREEDS_BY_NAME:
             return {
                 ...state,
-                breeds: action.payload,
+                breeds: action.payload.data,
                 breedsFilter: action.payload
             }
-        
-        case GET_BREED_DETAIL: {
-            return {
-                ...state,
-                breedDetail: action.payload
-            }
-        }
 
         case GET_TEMPERS:
             return {
@@ -46,118 +38,142 @@ function reducer(state = initialState, action) {
             }
 
         case FILTER_TEMP:
-            if(action.payload === 'All') {
+            if (action.payload === 'All') {
                 return {
                     ...state,
-                    breedsFilter: state.breeds
-                }
-            }
-            return{
-                ...state,
-                breedsFilter: state.breeds.filter(e => e.temperament?.includes(action.payload))
-            }
-
-        case FILTER_ORIGIN:
-            if(action.payload === 'API') {
-                return {
-                    ...state,
-                    breedsFilter: state.breeds.filter(e => typeof e.id === 'number')
-                }
-            }
-            if(action.payload === 'DB') {
-                return {
-                    ...state,
-                    breedsFilter: state.breeds.filter(e => typeof e.id === 'string')
+                    breedsFilter: { status: 'OK', data: state.breeds }
                 }
             }
             return {
                 ...state,
-                breedsFilter: state.breeds
+                breedsFilter: {
+                    status: 'OK',
+                    data: state.breeds.filter(e => e.temperament?.includes(action.payload))
+                }
             }
 
-        case ORDER_BREEDS: 
+        case FILTER_ORIGIN:
+            if (action.payload === 'API') {
+                return {
+                    ...state,
+                    breedsFilter: {
+                        status: 'OK',
+                        data: state.breeds.filter(e => typeof e.id === 'number')
+                    }
+                }
+            }
+            if (action.payload === 'DB') {
+                return {
+                    ...state,
+                    breedsFilter: {
+                        status: 'OK',
+                        data: state.breeds.filter(e => typeof e.id === 'string')
+                    }
+                }
+            }
+            return {
+                ...state,
+                breedsFilter: {
+                    status: 'OK',
+                    data:state.breeds
+                }
+            }
 
-            if(action.payload === 'name_asc'){
-                let breedsOrdered = [...state.breedsFilter]
+        case ORDER_BREEDS:
 
-                breedsOrdered.sort(function(a,b) {
+            if (action.payload === 'name_asc') {
+                let breedsOrdered = [...state.breedsFilter.data]
+
+                breedsOrdered.sort(function (a, b) {
                     let aLowerCase = a.name.toLowerCase();
                     let bLowerCase = b.name.toLowerCase();
-                    if(aLowerCase < bLowerCase) return -1
-                    if(aLowerCase > bLowerCase) return 1
+                    if (aLowerCase < bLowerCase) return -1
+                    if (aLowerCase > bLowerCase) return 1
                     return 0
                 });
 
                 return {
                     ...state,
-                    breedsFilter: [...breedsOrdered]
+                    breedsFilter: {
+                        status: 'OK',
+                        data: [...breedsOrdered]
+                    }
                 }
             }
 
-            if(action.payload === 'name_des'){
-                let breedsOrdered = [...state.breedsFilter]
-                breedsOrdered.sort(function(a,b) {
+            if (action.payload === 'name_des') {
+                let breedsOrdered = [...state.breedsFilter.data]
+                breedsOrdered.sort(function (a, b) {
                     let aLowerCase = a.name.toLowerCase();
                     let bLowerCase = b.name.toLowerCase();
-                    if(aLowerCase < bLowerCase) return 1
-                    if(aLowerCase > bLowerCase) return -1
+                    if (aLowerCase < bLowerCase) return 1
+                    if (aLowerCase > bLowerCase) return -1
                     return 0
                 });
                 return {
                     ...state,
-                    breedsFilter: [...breedsOrdered]
+                    breedsFilter: {
+                        status: 'OK',
+                        data: [...breedsOrdered]
+                    }
                 }
             }
 
-            if(action.payload === 'weight_asc'){
-                let breedsOrdered = [...state.breedsFilter]
-                breedsOrdered.sort(function(a,b) {
+            if (action.payload === 'weight_asc') {
+                let breedsOrdered = [...state.breedsFilter.data]
+                breedsOrdered.sort(function (a, b) {
                     let aWeight = parseInt(a.weight.split(' ')[0]);
                     let bWeight = parseInt(b.weight.split(' ')[0]);
 
-                    if(isNaN(aWeight)) {
+                    if (isNaN(aWeight)) {
                         aWeight = Infinity;
                     }
-                    if(isNaN(bWeight)) {
+                    if (isNaN(bWeight)) {
                         bWeight = Infinity;
                     }
 
-                    if(aWeight < bWeight) return -1
-                    if(aWeight > bWeight) return 1
+                    if (aWeight < bWeight) return -1
+                    if (aWeight > bWeight) return 1
                     return 0
                 });
                 return {
                     ...state,
-                    breedsFilter: [...breedsOrdered]
+                    breedsFilter: {
+                        status: 'OK',
+                        data: [...breedsOrdered]
+                    }
                 }
             }
 
-            if(action.payload === 'weight_des'){
-                let breedsOrdered = [...state.breedsFilter]
-                breedsOrdered.sort(function(a,b){
+            if (action.payload === 'weight_des') {
+                let breedsOrdered = [...state.breedsFilter.data]
+                breedsOrdered.sort(function (a, b) {
                     let aWeight = parseInt(a.weight.split(' ')[0]);
                     let bWeight = parseInt(b.weight.split(' ')[0]);
 
-                    if(isNaN(aWeight)) {
+                    if (isNaN(aWeight)) {
                         aWeight = 0;
                     }
-                    if(isNaN(bWeight)) {
+                    if (isNaN(bWeight)) {
                         bWeight = 0;
                     }
 
-                    if(aWeight < bWeight) return 1
-                    if(aWeight > bWeight) return -1
+                    if (aWeight < bWeight) return 1
+                    if (aWeight > bWeight) return -1
                     return 0
                 });
                 return {
                     ...state,
-                    breedsFilter: [...breedsOrdered]
+                    breedsFilter: {
+                        status: 'OK',
+                        data: [...breedsOrdered]
+                    }
                 }
             }
 
             return state
-        
-            default:
+
+        default:
             return state
     }
 }

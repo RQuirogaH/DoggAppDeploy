@@ -27,3 +27,32 @@
     flex-wrap: wrap;
     padding: 10px 20px;
 }
+
+.message {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+}
+
+.boton {
+    background-color: var(--color_golden);
+    margin-top: 10px;
+    width: 8vw;
+    height: 5vh;
+    text-align: center;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    border: 2px goldenrod solid;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.boton:hover{
+    border: none;
+    background-color: rgba(218, 165, 32, 0.616);
+}

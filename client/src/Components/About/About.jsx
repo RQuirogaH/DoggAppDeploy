@@ -4,7 +4,10 @@ import s from './About.module.css';
 
 const About = () => {
     return (
-        <NavBar />
+        <div className={s.container}>
+            <NavBar />
+            Sobre mi
+        </div>
     )
 }
 

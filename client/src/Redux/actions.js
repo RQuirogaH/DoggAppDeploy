@@ -2,7 +2,6 @@ import axios from 'axios';
 
 export const GET_BREEDS = 'GET_BREEDS';
 export const GET_BREEDS_BY_NAME = 'GET_BREEDS_BY_NAME';
-export const GET_BREED_DETAIL ='GET_BREED_DETAIL';
 export const GET_TEMPERS = 'GET_TEMPERS';
 export const ORDER_BREEDS = 'ORDER_BREEDS';
 export const FILTER_TEMP = 'FILTER_TEMP';
@@ -22,14 +21,6 @@ export function getBreedsByName(name) {
         let breeds = await axios.get(`http://localhost:3001/dogs?name=${name}`);
         let payload = breeds.data;
         dispatch({ type: GET_BREEDS_BY_NAME, payload })
-    }
-}
-
-export function getBreedDetail(id) {
-    return async function(dispatch) {
-        let breeds = await axios.get(`http://localhost:3001/dogs/${id}`);
-        let payload = breeds.data;
-        dispatch({ type: GET_BREED_DETAIL, payload })
     }
 }
 
