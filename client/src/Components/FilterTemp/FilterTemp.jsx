@@ -2,7 +2,7 @@ import React from "react";
 import s from './FilterTemp.module.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { filterTemp } from "../../Redux/actions";
+import { filterTemp, setPage } from "../../Redux/actions";
 
 const FilterTemp = () => {
     
@@ -12,6 +12,7 @@ const FilterTemp = () => {
     let handleChange = (e) => {
         let tempName = e.target.selectedOptions[0].value;
         dispatch(filterTemp(tempName))
+        dispatch(setPage(1))
     }
 
     return (

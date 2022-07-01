@@ -72,6 +72,11 @@
     margin-bottom: 20px;
 }
 
+.info p {
+    padding: 0px;
+    margin: 5px;
+}
+
 .text span {
     font-weight: 700;
     color: var(--color_golden);

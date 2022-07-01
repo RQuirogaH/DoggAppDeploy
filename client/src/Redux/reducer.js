@@ -5,6 +5,8 @@ import {
     ORDER_BREEDS,
     FILTER_TEMP,
     FILTER_ORIGIN,
+    SET_PAGES_CONFIG,
+    SET_PAGE
 } from './actions';
 
 
@@ -12,6 +14,12 @@ const initialState = {
     breeds: [],
     breedsFilter: { status: 'loading', data: [] },
     temperaments: [],
+    page: {
+        cardsPerPage: 8,
+        min: 1,
+        max: null,
+        current: 1
+    },
     loading: false
 }
 
@@ -172,6 +180,19 @@ function reducer(state = initialState, action) {
             }
 
             return state
+
+        case SET_PAGES_CONFIG:
+            console.log('cambie la paginación')
+            return {
+                ...state,
+                page: {...state.page, max: Math.ceil(state.breedsFilter.data.length/state.page.cardsPerPage)}
+            }
+
+        case SET_PAGE:
+            return {
+                ...state,
+                page: {...state.page, current: action.payload}
+            }
 
         default:
             return state
