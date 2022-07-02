@@ -182,7 +182,6 @@ function reducer(state = initialState, action) {
             return state
 
         case SET_PAGES_CONFIG:
-            console.log('cambie la paginación')
             return {
                 ...state,
                 page: {...state.page, max: Math.ceil(state.breedsFilter.data.length/state.page.cardsPerPage)}
