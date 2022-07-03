@@ -1,6 +1,28 @@
 .container {
     position: relative;
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 89vh;
+}
+
+.container section {
+    background-color: var(--color_grey);
+    padding: 20px;
+    width: 80vw;
+    height: 80%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.card {
+    align-self: center;
+    transform: scale(80%);
 }
 
 .temperaments{
@@ -17,4 +39,38 @@
     padding: 10px;
     margin: 3px;
     font-size: 12px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.formulario div {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1px;
+    margin-bottom: 12px;
+}
+
+.formulario div input {
+    background-color: transparent;
+    border: none;
+    color:  white;
+    border-bottom: 1px solid white;
+}
+
+.formulario div input:focus {
+    outline: none;
+}
+
+.formulario div label {
+    margin: 0px 10px;
+}
+
+.formulario label{
+    margin: 0px;
+    padding: 0px;
 }

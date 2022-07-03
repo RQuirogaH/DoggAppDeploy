@@ -3,7 +3,7 @@
 .container {
     position: relative;
     width: 300px;
-    background: rgb(27, 27, 27);
+    background: var(--color_grey);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
