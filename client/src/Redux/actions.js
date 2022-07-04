@@ -8,6 +8,7 @@ export const FILTER_TEMP = 'FILTER_TEMP';
 export const FILTER_ORIGIN ='FILTER_ORIGIN';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_PAGES_CONFIG = 'SET_PAGES_CONFIG';
+export const CREATE_BREED = 'CREATE_BREED';
 
 
 export function getBreeds() {
@@ -65,6 +66,14 @@ export function setPage(payload) {
     return {
         type: SET_PAGE,
         payload
+    }
+}
+
+export function createDog(newDog) {
+    return async function (dispatch) {
+        let breed = await axios.post('http://localhost:3001/dogs', newDog);
+        let payload = breed.data;
+        dispatch({ type: CREATE_BREED, payload});
     }
 }
 

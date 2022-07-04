@@ -6,21 +6,22 @@ import {
     FILTER_TEMP,
     FILTER_ORIGIN,
     SET_PAGES_CONFIG,
-    SET_PAGE
+    SET_PAGE,
+    CREATE_BREED
 } from './actions';
 
 
 const initialState = {
     breeds: [],
-    breedsFilter: { status: 'loading', data: [] },
+    breedsFilter: [],
     temperaments: [],
     page: {
-        cardsPerPage: 8,
+        cardsPerPage: 9,
         min: 1,
         max: null,
         current: 1
     },
-    loading: false
+    status: 'LOADING'
 }
 
 function reducer(state = initialState, action) {
@@ -29,68 +30,64 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 breeds: action.payload.data,
-                breedsFilter: action.payload
+                breedsFilter: action.payload.data,
+                status: action.payload.status
             }
 
         case GET_BREEDS_BY_NAME:
             return {
                 ...state,
                 breeds: action.payload.data,
-                breedsFilter: action.payload
+                breedsFilter: action.payload.data,
+                status: action.payload.status
             }
 
         case GET_TEMPERS:
             return {
                 ...state,
-                temperaments: action.payload
+                temperaments: action.payload.data,
+                status: action.payload.status
             }
 
         case FILTER_TEMP:
             if (action.payload === 'All') {
                 return {
                     ...state,
-                    breedsFilter: { status: 'OK', data: state.breeds }
+                    breedsFilter: state.breeds,
+                    status: 'OK'
                 }
             }
             return {
                 ...state,
-                breedsFilter: {
-                    status: 'OK',
-                    data: state.breeds.filter(e => e.temperament?.includes(action.payload))
-                }
+                status: 'OK',
+                breedsFilter: state.breeds.filter(e => e.temperament?.includes(action.payload))
             }
 
         case FILTER_ORIGIN:
             if (action.payload === 'API') {
                 return {
                     ...state,
-                    breedsFilter: {
-                        status: 'OK',
-                        data: state.breeds.filter(e => typeof e.id === 'number')
-                    }
+                    breedsFilter: state.breeds.filter(e => typeof e.id === 'number'),
+                    status: 'OK'
                 }
             }
             if (action.payload === 'DB') {
                 return {
                     ...state,
-                    breedsFilter: {
-                        status: 'OK',
-                        data: state.breeds.filter(e => typeof e.id === 'string')
-                    }
+                    breedsFilter: state.breeds.filter(e => typeof e.id === 'string'),
+                    status: 'OK'
                 }
             }
             return {
                 ...state,
-                breedsFilter: {
-                    status: 'OK',
-                    data:state.breeds
-                }
+                breedsFilter: state.breeds,
+                status: 'OK'
             }
 
         case ORDER_BREEDS:
 
             if (action.payload === 'name_asc') {
-                let breedsOrdered = [...state.breedsFilter.data]
+                let breedsOrdered = [...state.breedsFilter]
 
                 breedsOrdered.sort(function (a, b) {
                     let aLowerCase = a.name.toLowerCase();
@@ -102,15 +99,13 @@ function reducer(state = initialState, action) {
 
                 return {
                     ...state,
-                    breedsFilter: {
-                        status: 'OK',
-                        data: [...breedsOrdered]
-                    }
+                    breedsFilter: [...breedsOrdered],
+                    status: 'OK'
                 }
             }
 
             if (action.payload === 'name_des') {
-                let breedsOrdered = [...state.breedsFilter.data]
+                let breedsOrdered = [...state.breedsFilter]
                 breedsOrdered.sort(function (a, b) {
                     let aLowerCase = a.name.toLowerCase();
                     let bLowerCase = b.name.toLowerCase();
@@ -120,15 +115,13 @@ function reducer(state = initialState, action) {
                 });
                 return {
                     ...state,
-                    breedsFilter: {
-                        status: 'OK',
-                        data: [...breedsOrdered]
-                    }
+                    status: 'OK',
+                    breedsFilter: [...breedsOrdered]
                 }
             }
 
             if (action.payload === 'weight_asc') {
-                let breedsOrdered = [...state.breedsFilter.data]
+                let breedsOrdered = [...state.breedsFilter]
                 breedsOrdered.sort(function (a, b) {
                     let aWeight = parseInt(a.weight.split(' ')[0]);
                     let bWeight = parseInt(b.weight.split(' ')[0]);
@@ -146,15 +139,13 @@ function reducer(state = initialState, action) {
                 });
                 return {
                     ...state,
-                    breedsFilter: {
-                        status: 'OK',
-                        data: [...breedsOrdered]
-                    }
+                    status: 'OK',
+                    breedsFilter: [...breedsOrdered]
                 }
             }
 
             if (action.payload === 'weight_des') {
-                let breedsOrdered = [...state.breedsFilter.data]
+                let breedsOrdered = [...state.breedsFilter]
                 breedsOrdered.sort(function (a, b) {
                     let aWeight = parseInt(a.weight.split(' ')[0]);
                     let bWeight = parseInt(b.weight.split(' ')[0]);
@@ -172,10 +163,8 @@ function reducer(state = initialState, action) {
                 });
                 return {
                     ...state,
-                    breedsFilter: {
-                        status: 'OK',
-                        data: [...breedsOrdered]
-                    }
+                    status: 'OK',
+                    breedsFilter: [...breedsOrdered]
                 }
             }
 
@@ -184,14 +173,23 @@ function reducer(state = initialState, action) {
         case SET_PAGES_CONFIG:
             return {
                 ...state,
-                page: {...state.page, max: Math.ceil(state.breedsFilter.data.length/state.page.cardsPerPage)}
+                page: { ...state.page, max: Math.ceil(state.breedsFilter.length / state.page.cardsPerPage) }
             }
 
         case SET_PAGE:
             return {
                 ...state,
-                page: {...state.page, current: action.payload}
+                page: { ...state.page, current: action.payload }
             }
+
+        case CREATE_BREED: {
+            console.log(action)
+            return {
+                ...state,
+                breeds: [...state.breeds, action.payload.data[0]],
+                status: action.payload.status
+            }
+        }
 
         default:
             return state

@@ -5,12 +5,13 @@
 }
 
 .NavBar {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0pc;
+    margin: 0px;
     padding: 10px 20px;
-    height: 8vh;
+    height: 10vh;
     position: relative;
     background-color: #dbcb53
 }

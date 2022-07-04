@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { Router } = require('express');
 const {dtoAPI, dtoDB} = require('../DTOfunctions')
-const { Op, Dog, Temperament } = require('../db') 
+const { Dog, Temperament } = require('../db') 
 const router = Router();
 
 router.get('/', async (req,res) => {
@@ -59,30 +59,29 @@ router.get('/', async (req,res) => {
         });
 
         if(!response.length) {
-            return res.json({status: 'OK', data: response})
+            return res.json({status: 'NO DATA', msg: 'No existe la raza que estás buscando'})
         }
 
         res.json({status: 'OK', data: response})
     }
     catch(err) {
-        res.json({msg: 'Ocurrió un error con los datos ingresados', err: err.message})
+        res.json({status: 'ERROR', msg: 'Ocurrió un error con los datos ingresados'})
     }
 })
 
 router.get('/:idRaza', async (req, res) => {
     const id = req.params.idRaza;
-    
     try {
         if(id.includes('-')){
-            const breed = await Dog.findByPk(id)
-    
+            let breed = await Dog.findByPk(id,{
+                include: Temperament
+            })
             if(!breed){
-                return res.json([{err: 'No existe la raza que estás buscando'}])
+                return res.json({status: 'NO DATA', msg: 'No existe la raza que estás buscando'})
             }
-            
-            breed = dtoDB(breed)
+            breed = dtoDB([breed.dataValues])
 
-            return res.json(breed)
+            return res.json({status: 'OK', data: breed})
         }
     
         const breeds = await axios.get('https://api.thedogapi.com/v1/breeds');
@@ -91,22 +90,21 @@ router.get('/:idRaza', async (req, res) => {
         response = response.filter(b => b.id === parseInt(id))
     
         if(!response.length){
-            return res.json([{err: 'No existe la raza que estás buscando'}])
+            return res.json({status: 'NO DATA', msg: 'No existe la raza que estás buscando'})
         }
         
         response = dtoAPI(response)
         
-        res.json(response)
+        res.json({status: 'OK', data: response})
     }    
     catch(err) {
-        res.json({msg: 'Ocurrió un error con los datos ingresados', err: err.message})
+        res.json({status: 'ERROR', msg: 'Ocurrió un error con los datos ingresados'})
     }
 })
 
 router.post('/', async (req, res) => {
     const {name, height, weight, life_span, temperaments, img} = req.body;
     try {
-
         let [newBreed,created] = await Dog.findOrCreate({
             where: {name: name},
             defaults: {
@@ -125,7 +123,7 @@ router.post('/', async (req, res) => {
                 include: Temperament
             })
             breedCrated = dtoDB([breedCrated.dataValues])
-            return res.json({msg: 'La raza ya existe', breed: breedCrated})
+            return res.json({status: 'EXISTED', data: breedCrated})
         }
 
         if(temperaments){
@@ -144,10 +142,10 @@ router.post('/', async (req, res) => {
             include: Temperament
         })
         breedCrated = dtoDB([breedCrated.dataValues])
-        res.json(breedCrated)
+        res.json({status: 'CREATED', data: breedCrated})
     }
     catch(err) {
-        res.json({msg: 'Ocurrió un error con los datos ingresados', err: err.message})
+        res.json({status: 'ERROR', msg: 'Ocurrió un error con los datos ingresados'})
     }
 
 })

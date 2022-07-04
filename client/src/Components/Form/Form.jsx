@@ -3,7 +3,7 @@ import s from './Form.module.css'
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTemperaments } from "../../Redux/actions";
+import { getTemperaments,createDog } from "../../Redux/actions";
 import Card from "../Card/Card";
 
 
@@ -30,17 +30,28 @@ const Form = () => {
         url: ''
     })
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('enviar')
-    }
+    const [error, setError] = useState({
+        name: '',
+        height_min: '',
+        height_max: '',
+        weight_min: '',
+        weight_max: '',
+        life_min: '',
+        life_max: '',
+        isOkay: false,
+    })
 
-    const handleChangeText = (e) => {
-        let inputText = e.target.value.replace(/[^a-z\s]/gi, '');
-        setInput({
-            ...input,
-            [e.target.id]: inputText
-        })
+    const handleSubmit = (e) => {
+        let newDog = {
+            name: input.name,
+            height: input.height_max ? `${input.height_min} - ${input.height_max}` : `${input.height_min}`,
+            weight: input.weight_max ? `${input.weight_min} - ${input.weight_max}` : `${input.weight_min}`,
+            life_span: input.life_max ? `${input.life_min} - ${input.life_max}` : `${input.life_min}`,
+            temperaments: [...input.temperaments],
+            img: input.url
+        }
+        e.preventDefault();
+        dispatch(createDog(newDog))
     }
 
     const handleChange = (e) => {
@@ -50,13 +61,28 @@ const Form = () => {
         })
     }
 
-
     const handleChangeNumber = (e) => {
         let inputText = e.target.value.replace(/\D/g, '')
         setInput({
             ...input,
             [e.target.id]: inputText
         })
+        setError(validation({
+            ...input,
+            [e.target.id]: inputText
+        }))
+    }
+
+    const handleChangeText = (e) => {
+        let inputText = e.target.value.replace(/[^a-z\s]/gi, '');
+        setInput({
+            ...input,
+            [e.target.id]: inputText
+        })
+        setError(validation({
+            ...input,
+            [e.target.id]: inputText
+        }))
     }
 
     const handleSetTemperaments = (e) => {
@@ -75,49 +101,113 @@ const Form = () => {
         })
     }
 
+    const validation = (input) => {
+        const error = {}
+        error.isOkay = true
+        if (!input.name) {
+            error.name = 'Breed name is required'
+            error.isOkay = false
+        }
+        if (!input.height_min) {
+            error.height_min = 'Min height is required'
+            error.isOkay = false
+        }
+        if (input.height_max && Number(input.height_max) < Number(input.height_min)) {
+            error.height_max = 'Max height must to be greater than min'
+            error.isOkay = false
+        }
+        if (!input.weight_min) {
+            error.weight_min = 'Min weight is required'
+            error.isOkay = false
+        }
+        if (input.weight_max && Number(input.weight_max) < Number(input.weight_min)) {
+            error.weight_max = 'Max weight must to be greater than min'
+            error.isOkay = false
+        }
+        if (!input.life_min) {
+            error.life_min = 'Min life span is required'
+            error.isOkay = false
+        }
+        if (input.life_max && Number(input.life_max) < Number(input.life_min)) {
+            error.life_max = 'Max life span must to be greater than min'
+            error.isOkay = false
+        }
+
+        return error
+    }
+
     return (
         <div className={s.container}>
             <section>
                 <form onSubmit={(e) => handleSubmit(e)} className={s.formulario}>
-                    <h3>Create your dog</h3>
 
-                    <label htmlFor='name'>Name</label>
                     <div>
-                        <input type="text" id="name" onChange={(e) => handleChangeText(e)} value={input.name} autoComplete='off' />
+                        <label htmlFor='name' className={s.label}>Name</label>
+                        <input type="text" id="name" onChange={(e) => handleChangeText(e)} value={input.name} autoComplete='off' className={s.textInput} />
+                        <div className={s.errorDiv}>
+                            {error.name && <span className={s.error}>{error.name}</span>}
+                        </div>
                     </div>
 
-                    <label htmlFor='height_min' className={s.minMax}>Height</label>
                     <div>
-                        <input type='text' id="height_min" onChange={(e) => handleChangeNumber(e)} value={input.height_min} autoComplete='off' placeholder="min (required)" />
-                        <label htmlFor='height_max'> - </label>
-                        <input type='text' id="height_max" onChange={(e) => handleChangeNumber(e)} value={input.height_max} autoComplete='off' placeholder="max (optional)" />
-                        <label htmlFor='height_min'> cm</label>
+                        <label htmlFor='weight_min' className={s.label}>Weight</label>
+                        <div className={s.inputContainer}>
+                            <input type='text' id="weight_min" onChange={(e) => handleChangeNumber(e)} value={input.weight_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
+                            <label htmlFor='weight_min' className={s.unit}> kg</label>
+                        </div>
+                        <label htmlFor='weight_max' className={s.label}> - </label>
+                        <div className={s.inputContainer}>
+                            <input type='text' id="weight_max" onChange={(e) => handleChangeNumber(e)} value={input.weight_max} autoComplete='off' placeholder="max" className={s.numberInput} />
+                            <label htmlFor='weight_max' className={s.unit}> kg</label>
+                        </div>
+                        <div className={s.errorDiv}>
+                            {error.weight_min && <span className={s.error}>{error.weight_min}</span>}
+                            {error.weight_max && <span className={s.error}>{error.weight_max}</span>}
+                        </div>
                     </div>
 
-                    <label htmlFor='weight_min' className={s.minMax}>Weight</label>
                     <div>
-                        <input type='text' id="weight_min" onChange={(e) => handleChangeNumber(e)} value={input.weight_min} autoComplete='off' placeholder="min (required)" />
-                        <label htmlFor='weight_max'> - </label>
-                        <input type='text' id="weight_max" onChange={(e) => handleChangeNumber(e)} value={input.weight_max} autoComplete='off' placeholder="max (optional)" />
-                        <label htmlFor='weight_min'> kg</label>
+                        <label htmlFor='height_min' className={s.label}>Height</label>
+                        <div className={s.inputContainer}>
+                            <input type='text' id="height_min" onChange={(e) => handleChangeNumber(e)} value={input.height_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
+                            <label htmlFor='height_min' className={s.unit}> cm</label>
+                        </div>
+                        <label htmlFor='height_max' className={s.label}> - </label>
+                        <div className={s.inputContainer}>
+                            <input type='text' id="height_max" onChange={(e) => handleChangeNumber(e)} value={input.height_max} autoComplete='off' placeholder="max" className={s.numberInput} />
+                            <label htmlFor='height_max' className={s.unit}> cm</label>
+                        </div>
+                        <div className={s.errorDiv}>
+                            {error.height_min && <span className={s.error}>{error.height_min}</span>}
+                            {error.height_max && <span className={s.error}>{error.height_max}</span>}
+                        </div>
                     </div>
 
-                    <label htmlFor='life_min' className={s.minMax}>Life span</label>
                     <div>
-                        <input type="text" id="life_min" onChange={(e) => handleChangeNumber(e)} value={input.life_min} autoComplete='off' placeholder="min (required)" />
-                        <label htmlFor='leight_max'> - </label>
-                        <input type="text" id="life_max" onChange={(e) => handleChangeNumber(e)} value={input.life_max} autoComplete='off' placeholder="max (optional)" />
-                        <label htmlFor='leight_max'> years </label>
+                        <label htmlFor='life_min' className={s.label}>Life span</label>
+                        <div className={s.inputContainer}>
+                            <input type="text" id="life_min" onChange={(e) => handleChangeNumber(e)} value={input.life_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
+                            <label htmlFor='life_min' className={s.unit}> yr</label>
+                        </div>
+                        <label htmlFor='leight_max' className={s.label}> - </label>
+                        <div className={s.inputContainer}>
+                            <input type="text" id="life_max" onChange={(e) => handleChangeNumber(e)} value={input.life_max} autoComplete='off' placeholder="max" className={s.numberInput} />
+                            <label htmlFor='life_max' className={s.unit}> yr</label>
+                        </div>
+                        <div className={s.errorDiv}>
+                            {error.life_min && <span className={s.error}>{error.life_min}</span>}
+                            {error.life_max && <span className={s.error}>{error.life_max}</span>}
+                        </div>
                     </div>
 
-                    <label htmlFor='url'>Image URL</label>
                     <div>
-                        <input type="text" id="url" onChange={(e) => handleChange(e)} value={input.url} autoComplete='off' />
+                        <label htmlFor='url' className={s.label} >Image URL</label>
+                        <input type="text" id="url" onChange={(e) => handleChange(e)} value={input.url} autoComplete='off' className={s.textInput} />
                     </div>
 
-                    <label htmlFor="temperaments">Temperaments:</label>
                     <div>
-                        <select defaultValue='Select_temperaments' name="temperaments" id="temperaments" onChange={(e) => handleSetTemperaments(e)}>
+                        <label htmlFor="temperaments" className={s.label}>Temperaments</label>
+                        <select defaultValue='Select_temperaments' name="temperaments" id="temperaments" onChange={(e) => handleSetTemperaments(e)} className={s.dropList}>
                             <option disabled value="Select_temperaments">Select temperaments</option>
                             {
                                 temperaments.map(e => {
@@ -130,20 +220,27 @@ const Form = () => {
                     <div className={s.temperaments}>
                         {
                             input.temperaments?.map((t, ind) => <div key={`temp${ind}`}>
-                                <span>{t}</span>
-                                <button type="button" value={t} onClick={(e) => handleDeleteTemp(e)}>X</button>
+                                <button type="button" value={t} onClick={(e) => handleDeleteTemp(e)}>{t}</button>
                             </div>)
                         }
                     </div>
 
-                    <button type="submit">Enviar</button>
+                    {
+                        error.isOkay 
+                        ? <button type="submit" className={s.send}>Create</button> 
+                        : <button type="submit" disabled className={s.sendDisabled}>Create</button>
+                    }
+
                 </form>
                 <div className={s.card}>
                     <Card
                         key={`${input.name}_${input.url}`}
                         name={input.name}
-                        weight={input.weight}
+                        weight={input.weight_max ? `${Number(input.weight_min)} -  ${Number(input.weight_max)}` : `${Number(input.weight_min)}`}
+                        height={input.height_max ? `${Number(input.height_min)} -  ${Number(input.height_max)}` : `${Number(input.height_min)}`}
+                        life={input.life_max ? `${Number(input.life_min)} -  ${Number(input.life_max)}` : `${Number(input.life_min)}`}
                         temperament={input.temperaments}
+                        isCreate={true}
                         img={input.url} />
                 </div>
             </section>

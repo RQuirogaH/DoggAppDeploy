@@ -14,7 +14,7 @@ const BreedDetail = (props) => {
 
     useEffect(() => {
         axios.get(`http://localhost:3001/dogs/${id}`)
-            .then(response => setBreed(response.data[0]))
+            .then(response => setBreed(response.data.data[0]))
             .then(isLoading.current = false)
     }, [id])
 

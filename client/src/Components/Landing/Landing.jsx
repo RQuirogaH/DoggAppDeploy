@@ -10,7 +10,7 @@ const Landing = (props) => {
             <div className={s.main}>
                 <h1 className={s.title}>Dog App</h1>
                 <Link to='/home'>
-                    <button className={s.boton}>Ingresar</button>
+                    <button className={s.boton}>Enter</button>
                 </Link>
             </div>
         </div>

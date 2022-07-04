@@ -1,3 +1,4 @@
+/* css de todo el componente */
 .container {
     position: relative;
     color: white;
@@ -6,12 +7,14 @@
     align-items: center;
     justify-content: center;
     width: 100vw;
-    height: 89vh;
+    min-height: 89vh;
 }
 
+/* css del div */
 .container section {
     background-color: var(--color_grey);
     padding: 20px;
+    margin: 20px;
     width: 80vw;
     height: 80%;
     border-radius: 20px;
@@ -20,57 +23,148 @@
 
 }
 
+/* css del preview */
 .card {
     align-self: center;
-    transform: scale(80%);
+    transform: scale(90%);
 }
 
-.temperaments{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.temperaments > span {
-    border: 1px solid var(--color_golden);
-    border-radius: 20px;
-    padding: 10px;
-    margin: 3px;
-    font-size: 12px;
-}
-
+/* css del formulario */
 .formulario {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
+    align-items: flex-start;
+    width: 30vw;
 }
 
 .formulario div {
     display: flex;
     flex-direction: row;
-    padding-bottom: 1px;
-    margin-bottom: 12px;
-}
-
-.formulario div input {
-    background-color: transparent;
-    border: none;
-    color:  white;
-    border-bottom: 1px solid white;
-}
-
-.formulario div input:focus {
-    outline: none;
-}
-
-.formulario div label {
-    margin: 0px 10px;
-}
-
-.formulario label{
+    flex-wrap: wrap;
     margin: 0px;
     padding: 0px;
+    max-width: 100%;
+}
+
+.formulario div label:first-child {
+    width: 120px;
+    text-align: end;
+    font-weight: bold;
+}
+
+/* css del guion */
+.label {
+    margin: 0px 20px;
+}
+
+.textInput {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-family: 'Exo', sans-serif;
+    border-bottom: 1px solid white;
+    width: 240px;
+}
+
+.inputContainer {
+    border-bottom: 1px solid white;
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.numberInput {
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    font-family: 'Exo', sans-serif;
+    width: 80px;
+    text-align: center;
+}
+
+.unit {
+    color: rgba(255, 255, 255, 0.644);
+    font-size: 12px;
+    margin: 0px;
+    width: 20px;
+}
+
+.error {
+    font-size: 14px;
+    color: red;
+    font-style: italic;
+    margin-left: 10vw;
+    padding-top: 5px;
+    width: 25vw;
+    text-align: center;
+}
+
+.temperaments {
+    width: 100%;
+    justify-content: center;
+}
+
+.temperaments button {
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid var(--color_golden);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 3px;
+    color: white;
+    font-size: 12px;
+}
+
+.temperaments button:hover {
+    background-color: rgba(243, 56, 56, 0.6);
+    border: 1px solid red;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 3px;
+    color: white;
+    text-decoration: line-through;
+    font-size: 12px;
+}
+
+.dropList {
+    background-color: var(--color_grey);
+    border: none;
+    font-size: 15px;
+    color: white;
+}
+
+.send {
+    background-color: var(--color_golden);
+    color: var(--color_grey);
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
+    border: 2px var(--color_golden) solid;
+    border-radius: 10px;
+    align-self: center;
+    font-family: 'Exo', sans-serif;
+    font-size: 18px;
+}
+
+.sendDisabled {
+    background-color: var(--color_grey);
+    color: gray;
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
+    border: 2px gray solid;
+    border-radius: 10px;
+    align-self: center;
+    font-family: 'Exo', sans-serif;
+    font-size: 18px;
+}
+
+.send:hover {
+    background-color: var(--color_grey);
+    color: white;
 }

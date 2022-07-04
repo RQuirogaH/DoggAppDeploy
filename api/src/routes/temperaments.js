@@ -28,10 +28,10 @@ router.get('/', async (req,res) => {
         })
         
         await Promise.all(arrPromises)
-        res.send(resTemperaments)
+        res.json({status: 'OK', data: resTemperaments})
     }
     catch(err) {
-        res.json({msg: 'Ocurrió un error con los datos ingresados'})
+        res.json({status: 'error', msg: 'Ocurrió un error con los datos ingresados'})
     }
 })
 
