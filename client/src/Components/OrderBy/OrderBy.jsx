@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { orderBreeds } from "../../Redux/actions";
+import { orderBreeds, setPage } from "../../Redux/actions";
 import s from './OrderBy.module.css'
 
 const OrderBy = () => {
@@ -10,6 +10,7 @@ const OrderBy = () => {
     let handleChange = (e) => {
         let orderType = e.target.selectedOptions[0].value;
         dispatch(orderBreeds(orderType))
+        dispatch(setPage(1))
     }
 
     return (

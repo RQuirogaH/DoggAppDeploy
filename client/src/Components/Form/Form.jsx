@@ -3,13 +3,15 @@ import s from './Form.module.css'
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTemperaments,createDog } from "../../Redux/actions";
+import { getTemperaments, createDog, setStatus } from "../../Redux/actions";
 import Card from "../Card/Card";
+import Modal from "../Modal/Modal";
 
 
 const Form = () => {
 
     const temperaments = useSelector(state => state.temperaments)
+    const status = useSelector(state => state.status)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -48,9 +50,10 @@ const Form = () => {
             weight: input.weight_max ? `${input.weight_min} - ${input.weight_max}` : `${input.weight_min}`,
             life_span: input.life_max ? `${input.life_min} - ${input.life_max}` : `${input.life_min}`,
             temperaments: [...input.temperaments],
-            img: input.url
+            img: input.url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBUt-yCC6NE1bIScT5KXBvOxLv-VDQ3sWK3w&usqp=CAU"
         }
         e.preventDefault();
+        dispatch(setStatus('CREATING'))
         dispatch(createDog(newDog))
     }
 
@@ -226,9 +229,9 @@ const Form = () => {
                     </div>
 
                     {
-                        error.isOkay 
-                        ? <button type="submit" className={s.send}>Create</button> 
-                        : <button type="submit" disabled className={s.sendDisabled}>Create</button>
+                        error.isOkay
+                            ? <button type="submit" className={s.send}>Create</button>
+                            : <button type="submit" disabled className={s.sendDisabled}>Create</button>
                     }
 
                 </form>
@@ -244,6 +247,9 @@ const Form = () => {
                         img={input.url} />
                 </div>
             </section>
+            {
+                (status === 'CREATING' || status === 'CREATED' || status === 'EXISTED') && <Modal status={status} />
+            }
         </div>
     )
 }

@@ -1,8 +1,9 @@
 import React from "react";
 import {Link} from 'react-router-dom'
-import img from '../../Assets/home.png'
+import home from '../../Assets/home2.png'
+import collar from '../../Assets/collar1.png'
+
 import s from './NavBar.module.css'
-import SearchBar from '../SearchBar/SearchBar'
 import { useDispatch } from "react-redux";
 import { getBreeds } from "../../Redux/actions";
 
@@ -15,10 +16,9 @@ const NavBar = () => {
 
     return (
         <ul className={s.NavBar}>
-            <Link to='/home' onClick={() => getAllBreeds()}><img src={img} alt='home icon' className={s.homeIcon}/></Link>
+            <Link to='/home' onClick={() => getAllBreeds()}><img src={home} alt='home' className={s.homeIcon}/></Link>
             {/* <Link to='/about'>About</Link> */}
-            <SearchBar />
-            <Link to='/create'>Crear raza</Link>
+            <Link to='/create' className={s.create}><img src={collar} alt='.' className={s.collarIcon}/>Create breed</Link>
         </ul>
     )
 }

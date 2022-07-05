@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "../NavBar/NavBar";
-import Form from "../Form/Form";
+import NavBar from "../../Components/NavBar/NavBar";
+import Form from "../../Components/Form/Form";
 import s from './Create.module.css';
 
 const Create = () => {

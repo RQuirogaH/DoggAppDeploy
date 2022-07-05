@@ -9,6 +9,7 @@ export const FILTER_ORIGIN ='FILTER_ORIGIN';
 export const SET_PAGE = 'SET_PAGE';
 export const SET_PAGES_CONFIG = 'SET_PAGES_CONFIG';
 export const CREATE_BREED = 'CREATE_BREED';
+export const SET_STATUS ='SET_STATUS';
 
 
 export function getBreeds() {
@@ -32,6 +33,14 @@ export function getTemperaments() {
         let breed = await axios.get('http://localhost:3001/temperaments');
         let payload = breed.data;
         dispatch({ type: GET_TEMPERS, payload });
+    }
+}
+
+export function createDog(newDog) {
+    return async function (dispatch) {
+        let breed = await axios.post('http://localhost:3001/dogs', newDog);
+        let payload = breed.data;
+        dispatch({ type: CREATE_BREED, payload});
     }
 }
 
@@ -69,12 +78,12 @@ export function setPage(payload) {
     }
 }
 
-export function createDog(newDog) {
-    return async function (dispatch) {
-        let breed = await axios.post('http://localhost:3001/dogs', newDog);
-        let payload = breed.data;
-        dispatch({ type: CREATE_BREED, payload});
+export function setStatus(payload) {
+    return{
+        type: SET_STATUS,
+        payload
     }
 }
+
 
 

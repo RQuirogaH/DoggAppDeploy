@@ -1,21 +1,24 @@
 import React from "react";
 import axios from "axios";
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../../Components/NavBar/NavBar";
 import s from './BreedDetail.module.css';
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 
 const BreedDetail = (props) => {
 
     let [breed, setBreed] = useState({})
-    const isLoading = useRef(true)
+    let [localStatus, setLocalStatus] = useState('LOADING')
     let { id } = useParams();
 
     useEffect(() => {
         axios.get(`http://localhost:3001/dogs/${id}`)
-            .then(response => setBreed(response.data.data[0]))
-            .then(isLoading.current = false)
+            .then(response => { 
+                setBreed(response.data.data[0]);
+                setLocalStatus(response.data.status)
+            })
+
     }, [id])
 
     return (
@@ -23,12 +26,12 @@ const BreedDetail = (props) => {
             <NavBar />
             <div className={s.detail}>
                 {
-                    isLoading.current && <div>Estoy cargando, esperame</div>
+                    localStatus === 'LOADING' && <div>Estoy cargando, esperame</div>
                 }
                 {
-                    !isLoading.current && breed.id &&
+                    localStatus === 'OK' &&
                     <div className={s.breed}>
-                        <img src={`${breed.img}`} alt={`${breed.name}`} />
+                        <img src={`${breed.img}`} alt={`not found`} />
                         <section className={s.info}>
                             <h3>{breed.name}</h3>
                             <p className={s.text}>
@@ -54,7 +57,7 @@ const BreedDetail = (props) => {
                     </div>
                 }
                 {
-                    !isLoading.current && !breed.id &&
+                    localStatus === 'NO DATA' &&
                     <div className={s.message}>
                         Raza no encontrada
                         <Link to='/home'>

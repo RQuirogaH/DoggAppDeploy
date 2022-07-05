@@ -15,3 +15,20 @@
     position: relative;
     background-color: #dbcb53
 }
+
+.create {
+    text-decoration: none;
+    font-size: 'Dancing Script', cursive;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+
+}
+
+.collarIcon {
+    width: 40px;
+    padding-right: 10px;
+}

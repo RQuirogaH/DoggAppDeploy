@@ -7,7 +7,8 @@ import {
     FILTER_ORIGIN,
     SET_PAGES_CONFIG,
     SET_PAGE,
-    CREATE_BREED
+    CREATE_BREED,
+    SET_STATUS
 } from './actions';
 
 
@@ -15,6 +16,7 @@ const initialState = {
     breeds: [],
     breedsFilter: [],
     temperaments: [],
+    breedCreated: '',
     page: {
         cardsPerPage: 9,
         min: 1,
@@ -64,6 +66,7 @@ function reducer(state = initialState, action) {
             }
 
         case FILTER_ORIGIN:
+            console.log('in')
             if (action.payload === 'API') {
                 return {
                     ...state,
@@ -92,6 +95,7 @@ function reducer(state = initialState, action) {
                 breedsOrdered.sort(function (a, b) {
                     let aLowerCase = a.name.toLowerCase();
                     let bLowerCase = b.name.toLowerCase();
+
                     if (aLowerCase < bLowerCase) return -1
                     if (aLowerCase > bLowerCase) return 1
                     return 0
@@ -109,6 +113,7 @@ function reducer(state = initialState, action) {
                 breedsOrdered.sort(function (a, b) {
                     let aLowerCase = a.name.toLowerCase();
                     let bLowerCase = b.name.toLowerCase();
+                    
                     if (aLowerCase < bLowerCase) return 1
                     if (aLowerCase > bLowerCase) return -1
                     return 0
@@ -126,12 +131,8 @@ function reducer(state = initialState, action) {
                     let aWeight = parseInt(a.weight.split(' ')[0]);
                     let bWeight = parseInt(b.weight.split(' ')[0]);
 
-                    if (isNaN(aWeight)) {
-                        aWeight = Infinity;
-                    }
-                    if (isNaN(bWeight)) {
-                        bWeight = Infinity;
-                    }
+                    if (isNaN(aWeight)) aWeight = Infinity;
+                    if (isNaN(bWeight)) bWeight = Infinity;
 
                     if (aWeight < bWeight) return -1
                     if (aWeight > bWeight) return 1
@@ -150,12 +151,8 @@ function reducer(state = initialState, action) {
                     let aWeight = parseInt(a.weight.split(' ')[0]);
                     let bWeight = parseInt(b.weight.split(' ')[0]);
 
-                    if (isNaN(aWeight)) {
-                        aWeight = 0;
-                    }
-                    if (isNaN(bWeight)) {
-                        bWeight = 0;
-                    }
+                    if (isNaN(aWeight)) aWeight = 0;
+                    if (isNaN(bWeight)) bWeight = 0;
 
                     if (aWeight < bWeight) return 1
                     if (aWeight > bWeight) return -1
@@ -183,11 +180,17 @@ function reducer(state = initialState, action) {
             }
 
         case CREATE_BREED: {
-            console.log(action)
             return {
                 ...state,
-                breeds: [...state.breeds, action.payload.data[0]],
+                breedCreated: action.payload.data[0],
                 status: action.payload.status
+            }
+        }
+
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.payload
             }
         }
 

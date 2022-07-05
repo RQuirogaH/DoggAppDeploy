@@ -1,9 +1,10 @@
 import React from "react";
 import s from './HomePage.module.css'
-import NavBar from "../NavBar/NavBar";
-import Card from '../Card/Card'
-import FiltersBar from "../FiltersBar/FiltersBar";
-import Pagination from "../Pagination/Pagination";
+import NavBar from "../../Components/NavBar/NavBar";
+import Card from '../../Components/Card/Card'
+import FiltersBar from "../../Components/FiltersBar/FiltersBar";
+import Pagination from "../../Components/Pagination/Pagination";
+import gif from '../../Assets/loading2.gif'
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
@@ -45,7 +46,9 @@ const HomePage = () => {
             <FiltersBar />
             {
                 status === 'LOADING' &&
-                <div className={s.message}>Estoy cargando weyyyyyy</div>
+                <div className={s.message}>
+                    <img src={gif} alt="loading" className={s.gif}/>
+                </div>
             }
             {
                 status === 'OK' && breeds.length &&
@@ -66,7 +69,7 @@ const HomePage = () => {
                 </div>
             }
             {
-                status === 'OK' && !breeds.length &&
+                (status === 'NO DATA' || !breeds.length)  && 
                 <div className={s.message} >
                     No hay razas segun tu busqueda
                     <button className={s.boton} onClick={() => getAllBreeds()}>

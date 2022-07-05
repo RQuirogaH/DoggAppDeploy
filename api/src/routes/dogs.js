@@ -59,7 +59,7 @@ router.get('/', async (req,res) => {
         });
 
         if(!response.length) {
-            return res.json({status: 'NO DATA', msg: 'No existe la raza que estás buscando'})
+            return res.json({status: 'NO DATA', data: []})
         }
 
         res.json({status: 'OK', data: response})
@@ -72,25 +72,23 @@ router.get('/', async (req,res) => {
 router.get('/:idRaza', async (req, res) => {
     const id = req.params.idRaza;
     try {
-        if(id.includes('-')){
+        if(isNaN(Number(id))){
             let breed = await Dog.findByPk(id,{
                 include: Temperament
             })
             if(!breed){
-                return res.json({status: 'NO DATA', msg: 'No existe la raza que estás buscando'})
+                return res.json({status: 'NO DATA', data: []})
             }
             breed = dtoDB([breed.dataValues])
 
             return res.json({status: 'OK', data: breed})
         }
-    
         const breeds = await axios.get('https://api.thedogapi.com/v1/breeds');
         let response = breeds.data;
-    
         response = response.filter(b => b.id === parseInt(id))
     
         if(!response.length){
-            return res.json({status: 'NO DATA', msg: 'No existe la raza que estás buscando'})
+            return res.json({status: 'NO DATA', data: []})
         }
         
         response = dtoAPI(response)
@@ -98,7 +96,7 @@ router.get('/:idRaza', async (req, res) => {
         res.json({status: 'OK', data: response})
     }    
     catch(err) {
-        res.json({status: 'ERROR', msg: 'Ocurrió un error con los datos ingresados'})
+        res.json({status: 'NO DATA', data: []})
     }
 })
 
