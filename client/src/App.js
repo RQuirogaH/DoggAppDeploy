@@ -5,6 +5,7 @@ import Landing from './Pages/Landing/Landing';
 import HomePage from './Pages/HomePage/HomePage';
 import BreedDetail from './Pages/BreedDetail/BreedDetail';
 import Create from './Pages/Create/Create';
+import Error from './Pages/Error/Error';
 import { Route,Switch } from 'react-router-dom';
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
         </Route>
         <Route path='/create'>
           <Create />
+        </Route>
+        <Route path='/'>
+          <Error />
         </Route>
       </Switch>
     </React.Fragment>

@@ -40,6 +40,7 @@ const Form = () => {
         weight_max: '',
         life_min: '',
         life_max: '',
+        url: '',
         isOkay: false,
     })
 
@@ -62,6 +63,10 @@ const Form = () => {
             ...input,
             [e.target.id]: e.target.value
         })
+        setError(validation({
+            ...input,
+            [e.target.id]: e.target.value
+        }))
     }
 
     const handleChangeNumber = (e) => {
@@ -107,7 +112,7 @@ const Form = () => {
     const validation = (input) => {
         const error = {}
         error.isOkay = true
-        if (!input.name) {
+        if (!input.name.trim()) {
             error.name = 'Breed name is required'
             error.isOkay = false
         }
@@ -133,6 +138,11 @@ const Form = () => {
         }
         if (input.life_max && Number(input.life_max) < Number(input.life_min)) {
             error.life_max = 'Max life span must to be greater than min'
+            error.isOkay = false
+        }
+        let regexURL = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+        if (!regexURL.exec(input.url)) {
+            error.url = 'The URL is invalid'
             error.isOkay = false
         }
 
@@ -206,6 +216,9 @@ const Form = () => {
                     <div>
                         <label htmlFor='url' className={s.label} >Image URL</label>
                         <input type="text" id="url" onChange={(e) => handleChange(e)} value={input.url} autoComplete='off' className={s.textInput} />
+                        <div className={s.errorDiv}>
+                            {error.url && <span className={s.error}>{error.url}</span>}
+                        </div>
                     </div>
 
                     <div>
@@ -248,7 +261,8 @@ const Form = () => {
                 </div>
             </section>
             {
-                (status === 'CREATING' || status === 'CREATED' || status === 'EXISTED') && <Modal status={status} />
+                (status === 'CREATING' || status === 'CREATED' || status === 'EXISTED' || status === 'ERROR')
+                && <Modal status={status} />
             }
         </div>
     )

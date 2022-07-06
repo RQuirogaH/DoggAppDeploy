@@ -4,11 +4,12 @@ import NavBar from "../../Components/NavBar/NavBar";
 import Card from '../../Components/Card/Card'
 import FiltersBar from "../../Components/FiltersBar/FiltersBar";
 import Pagination from "../../Components/Pagination/Pagination";
+import SearchBar from "../../Components/SearchBar/SearchBar";
 import gif from '../../Assets/loading2.gif'
 
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { getBreeds, getTemperaments, setPageConfig } from "../../Redux/actions";
+import { applyFilter, getBreeds, getTemperaments, resetFilter, setPageConfig } from "../../Redux/actions";
 
 
 const HomePage = () => {
@@ -16,6 +17,7 @@ const HomePage = () => {
     const breeds = useSelector(state => state.breedsFilter);
     const page = useSelector(state => state.page);
     const status = useSelector(state => state.status)
+    const filters = useSelector(state => state.filters)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -29,8 +31,17 @@ const HomePage = () => {
         dispatch(setPageConfig())
     }, [breeds])
 
+    useEffect(() => {
+        dispatch(applyFilter())
+    }, [filters])
+
     const getAllBreeds = () => {
         dispatch(getBreeds())
+        dispatch(resetFilter())
+    }
+
+    const resetFilters = () => {
+        dispatch(resetFilter())
     }
 
     const breedsToShow = (arr) => {
@@ -43,11 +54,12 @@ const HomePage = () => {
     return (
         <div className={s.container}>
             <NavBar />
+            <SearchBar />
             <FiltersBar />
             {
                 status === 'LOADING' &&
                 <div className={s.message}>
-                    <img src={gif} alt="loading" className={s.gif}/>
+                    <img src={gif} alt="loading" className={s.gif} />
                 </div>
             }
             {
@@ -69,13 +81,23 @@ const HomePage = () => {
                 </div>
             }
             {
-                (status === 'NO DATA' || !breeds.length)  && 
+                status === 'NO DATA' &&
                 <div className={s.message} >
-                    No hay razas segun tu busqueda
+                    There is not breeds for your search, try with another breed
                     <button className={s.boton} onClick={() => getAllBreeds()}>
                         Back
                     </button>
                 </div>
+            }
+            {
+                (status === 'OK' && !breeds.length) &&
+                <div className={s.message} >
+                    There is not breeds the filters
+                    <button className={s.boton2} onClick={() => resetFilters()}>
+                        Reset filters
+                    </button>
+                </div>
+
             }
         </div>
     )

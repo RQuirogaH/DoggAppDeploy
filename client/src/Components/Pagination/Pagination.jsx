@@ -15,16 +15,16 @@ const Pagination = () => {
 
     const handleChangePage = (e) => {
         e.preventDefault();
-        if (e.target.id === 'BACK' && pageConfig.current !== pageConfig.min) {
+        if (e.target.id === 'back' && pageConfig.current !== pageConfig.min) {
             dispatch(setPage(pageConfig.current - 1))
         }
-        if (e.target.id === 'NEXT' && pageConfig.current !== pageConfig.max) {
+        if (e.target.id === 'next' && pageConfig.current !== pageConfig.max) {
             dispatch(setPage(pageConfig.current + 1))
         }
-        if (e.target.id === 'FIRST' && pageConfig.current !== pageConfig.min) {
+        if (e.target.id === 'first' && pageConfig.current !== pageConfig.min) {
             dispatch(setPage(pageConfig.min))
         }
-        if (e.target.id === 'LAST' && pageConfig.current !== pageConfig.max) {
+        if (e.target.id === 'last' && pageConfig.current !== pageConfig.max) {
             dispatch(setPage(pageConfig.max))
         }
     }
@@ -32,22 +32,22 @@ const Pagination = () => {
     return (
         <div className={s.container}>
             <form onClick={(e) => handleChangePage(e)}>
-                <button type='button' id='FIRST' className={pageConfig.current === 1 ? `${s.hide}` : `${s.show}`}>
-                    <img src={first} alt="First" id='FIRST' className={s.first}/>  
+                <button type='button' id='first' className={pageConfig.current === 1 ? `${s.hide}` : `${s.show}`}>
+                    <img src={first} alt="first" id='first' className={s.first}/>  
                 </button>
-                <button type='button' id='BACK' className={pageConfig.current === 1 ? `${s.hide}` : `${s.show}`}>
-                    <img src={prev} alt="Back" id='BACK' />
+                <button type='button' id='back' className={pageConfig.current === 1 ? `${s.hide}` : `${s.show}`}>
+                    <img src={prev} alt="back" id='back' className={s.back}/>
                 </button>
                 <label>
                     <span>{pageConfig.current}</span>
                     <span> de </span>
                     <span>{pageConfig.max}</span>
                 </label>
-                <button type='button' id='NEXT' className={pageConfig.current === pageConfig.max ? `${s.hide}` : `${s.show}`}>
-                    <img src={next} alt="Next" id='NEXT' />
+                <button type='button' id='next' className={pageConfig.current === pageConfig.max ? `${s.hide}` : `${s.show}`}>
+                    <img src={next} alt="next" id='next' className={s.next}/>
                 </button>
-                <button type='button' id='LAST' className={pageConfig.current === pageConfig.max ? `${s.hide}` : `${s.show}`} >
-                    <img src={last} alt="Last" id='LAST' />
+                <button type='button' id='last' className={pageConfig.current === pageConfig.max ? `${s.hide}` : `${s.show}`} >
+                    <img src={last} alt="last" id='last' className={s.last}/>
                 </button>
             </form>
         </div>

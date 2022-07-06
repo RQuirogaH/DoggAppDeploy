@@ -2,17 +2,33 @@
 
 .container {
     position: relative;
-    width: 300px;
-    background: var(--color_grey);
+    cursor: pointer;
+    text-decoration: none;
+
+    box-sizing: border-box;
+    width: 23vw;
+    margin: 10px;
+    padding: 1vw;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin: 10px;
-    padding: 10px;
-    color: var(--color_font);
+    text-align: center;
+
     border: 1px rgba(255, 255, 255, 0.2) solid;
+    transition: box-shadow 0.15s ease-in,
+                border 0.15s step-end;
     border-radius: 10px;
+
+    background: var(--color_grey);
+    color: var(--color_font);
+    color: var(--color_font);
+}
+
+.container:hover {
+    border: 1px rgba(218, 165, 32, 0.692) solid;
+    box-shadow: 0px 0px 12px 1px rgb(218, 165, 32);
 }
 
 .container p {
@@ -22,16 +38,15 @@
 
 .img {
     height: 35vh;
-    width: 100%;
+    width: 21vw;
     border-radius: 10px;
     margin: 0px;
 }
 
 .breedName {
-    text-decoration: none;
     font-family: var(--font_cursive);
     color: var(--color_golden);
-    font-size: 30px;
+    font-size: 2rem;
     text-align: center;
     max-width: 95%;
 }
@@ -40,24 +55,21 @@
     margin-bottom: 15px;
 }
 
-.breedName:hover {
-    text-decoration: underline;
-}
-
 .span {
-   font-weight: 800;
+    font-weight: 800;
 }
 
-.temperaments{
+.temperaments {
+    box-sizing: border-box;
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 10px;
+    padding: 5px;
 }
 
-.temperaments > span {
+.temperaments>span {
     border: 1px solid var(--color_golden);
     border-radius: 20px;
     padding: 10px;

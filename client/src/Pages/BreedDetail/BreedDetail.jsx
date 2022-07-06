@@ -3,7 +3,7 @@ import axios from "axios";
 import NavBar from "../../Components/NavBar/NavBar";
 import s from './BreedDetail.module.css';
 import { useParams } from "react-router-dom";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const BreedDetail = (props) => {
@@ -14,12 +14,17 @@ const BreedDetail = (props) => {
 
     useEffect(() => {
         axios.get(`http://localhost:3001/dogs/${id}`)
-            .then(response => { 
+            .then(response => {
                 setBreed(response.data.data[0]);
                 setLocalStatus(response.data.status)
             })
 
     }, [id])
+
+    const handleError = (e) => {
+        e.target.onerror = null;
+        e.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBUt-yCC6NE1bIScT5KXBvOxLv-VDQ3sWK3w&usqp=CAU"
+    }
 
     return (
         <div className={s.container}>
@@ -31,7 +36,7 @@ const BreedDetail = (props) => {
                 {
                     localStatus === 'OK' &&
                     <div className={s.breed}>
-                        <img src={`${breed.img}`} alt={`not found`} />
+                        <img src={`${breed.img}`} alt={`not found`} onError={(e) => handleError(e)} />
                         <section className={s.info}>
                             <h3>{breed.name}</h3>
                             <p className={s.text}>

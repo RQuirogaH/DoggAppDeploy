@@ -1,25 +1,24 @@
 import React from "react";
 import s from './FilterTemp.module.css';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { filterTemp, setPage } from "../../Redux/actions";
+import { useSelector, useDispatch } from "react-redux";
+import { setPage, setFilter } from "../../Redux/actions";
 
 const FilterTemp = () => {
-    
+
     const dispatch = useDispatch();
     const temperaments = useSelector(state => state.temperaments)
+    const filterTemperament = useSelector(state => state.filters.temperament)
 
     let handleChange = (e) => {
-        let tempName = e.target.selectedOptions[0].value;
-        dispatch(filterTemp(tempName))
+        dispatch(setFilter({ key: 'temperament', value: e.target.value }))
         dispatch(setPage(1))
     }
 
     return (
         <div>
-            <form className={s.container} onChange={(e) => handleChange(e)}>
+            <form className={s.container} >
                 <label>Temperament: </label>
-                <select name="filterTemp" id="filterTemp">
+                <select name="filterTemp" id="filterTemp" onChange={(e) => handleChange(e)} value={filterTemperament}>
                     <option value="All">All</option>
                     {
                         temperaments.map(e => {

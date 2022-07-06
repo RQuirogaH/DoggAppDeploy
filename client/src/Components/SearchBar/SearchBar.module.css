@@ -3,29 +3,33 @@
 .form{
     position: relative;
     box-sizing: border-box;
-    width: 200px;
-    height: 40px;
+    width: 20vw;
+    height: 6vh;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    border: 1px var(--color_golden) solid;
+    border: 1px var(--color_grey) solid;
     border-radius: 20px;
     margin: 0px;
     padding: 10px 7px;
+
+    position: absolute;
+    top: 2vh;
+    left: 40vw;
 
 }
 
 .input {
     box-sizing: border-box;
-    width: 150px;
+    width: 15vw;
     margin: 0px;
     margin-left: 7px;
 
     background-color: transparent;
     border: none;
-    color: var(--color_golden);
+    color: var(--color_grey);
     outline: none;
 
     font-size: 15px;

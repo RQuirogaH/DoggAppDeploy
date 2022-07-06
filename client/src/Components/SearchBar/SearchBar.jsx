@@ -2,7 +2,7 @@ import React from "react";
 import s from './SearchBar.module.css';
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getBreedsByName, setPage, setStatus } from "../../Redux/actions";
+import { getBreedsByName, setPage, setStatus, resetFilter } from "../../Redux/actions";
 import lupa from '../../Assets/lupa.png'
 
 
@@ -23,6 +23,7 @@ const SearchBar = () => {
         dispatch(setStatus('LOADING'))
         dispatch(getBreedsByName(input))
         dispatch(setPage(1))
+        dispatch(resetFilter())
         setInput('');
     }
 

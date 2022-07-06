@@ -8,7 +8,6 @@ import s from './FiltersBar.module.css'
 const FiltersBar = () => {
     return (
         <div className={s.container}>
-            <SearchBar />
             <OrderBy />
             <FilterTemp />
             <FilterOrigin />

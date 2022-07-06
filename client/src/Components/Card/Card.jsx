@@ -9,12 +9,10 @@ const handleError = (e) => {
 
 const Card = (props) => {
     return (
-        <div className={s.container}>
+        <Link to={props.isCreate ? `#` : `/breed/${props.id}`} className={s.container}>
             <img src={`${props.img}`} onError={(e) => handleError(e)}
                 alt='img not found' className={s.img} />
-            {
-                props.isCreate ? <Link to='#' className={s.breedName}><h3>{props.name}</h3></Link> : <Link to={`/breed/${props.id}`} className={s.breedName}><h3>{props.name}</h3></Link>
-            }
+            <h3 className={s.breedName}>{props.name}</h3>
             <p><span className={s.span}>Weight:</span> {props.weight} kg</p>
             {
                 props.isCreate &&
@@ -28,7 +26,7 @@ const Card = (props) => {
                     props.temperament?.map((t, ind) => <span key={`temp${ind}`} >{t}</span>)
                 }
             </div>
-        </div>
+        </Link>
     )
 }
 

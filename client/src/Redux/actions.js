@@ -3,13 +3,16 @@ import axios from 'axios';
 export const GET_BREEDS = 'GET_BREEDS';
 export const GET_BREEDS_BY_NAME = 'GET_BREEDS_BY_NAME';
 export const GET_TEMPERS = 'GET_TEMPERS';
-export const ORDER_BREEDS = 'ORDER_BREEDS';
-export const FILTER_TEMP = 'FILTER_TEMP';
-export const FILTER_ORIGIN ='FILTER_ORIGIN';
+export const CREATE_BREED = 'CREATE_BREED';
+
 export const SET_PAGE = 'SET_PAGE';
 export const SET_PAGES_CONFIG = 'SET_PAGES_CONFIG';
-export const CREATE_BREED = 'CREATE_BREED';
+
 export const SET_STATUS ='SET_STATUS';
+
+export const SET_FILTER = 'SET_FILTER';
+export const RESET_FILTER = 'RESET_FILTER';
+export const APPLY_FILTER ='APPLY_FILTER'; 
 
 
 export function getBreeds() {
@@ -44,27 +47,6 @@ export function createDog(newDog) {
     }
 }
 
-export function orderBreeds(payload) {
-    return {
-        type: ORDER_BREEDS,
-        payload
-    }
-}
-
-export function filterTemp(payload) {
-    return {
-        type: FILTER_TEMP,
-        payload
-    }
-}
-
-export function filterOrigin(payload){
-    return {
-        type: FILTER_ORIGIN,
-        payload
-    }
-}
-
 export function setPageConfig() {
     return {
         type: SET_PAGES_CONFIG
@@ -82,6 +64,25 @@ export function setStatus(payload) {
     return{
         type: SET_STATUS,
         payload
+    }
+}
+
+export function resetFilter() {
+    return {
+        type: RESET_FILTER
+    }
+}
+
+export function setFilter(payload) {
+    return {
+        type: SET_FILTER,
+        payload
+    }
+}
+
+export function applyFilter() {
+    return {
+        type: APPLY_FILTER
     }
 }
 
