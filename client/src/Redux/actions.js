@@ -17,7 +17,7 @@ export const APPLY_FILTER ='APPLY_FILTER';
 
 export function getBreeds() {
     return async function (dispatch) {
-        let breed = await axios.get('http://localhost:3001/dogs');
+        let breed = await axios.get('/dogs');
         let payload = breed.data;
         dispatch({ type: GET_BREEDS, payload });
     }
@@ -25,7 +25,7 @@ export function getBreeds() {
 
 export function getBreedsByName(name) {
     return async function (dispatch) {
-        let breeds = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+        let breeds = await axios.get(`/dogs?name=${name}`);
         let payload = breeds.data;
         dispatch({ type: GET_BREEDS_BY_NAME, payload })
     }
@@ -33,7 +33,7 @@ export function getBreedsByName(name) {
 
 export function getTemperaments() {
     return async function (dispatch) {
-        let breed = await axios.get('http://localhost:3001/temperaments');
+        let breed = await axios.get('/temperaments');
         let payload = breed.data;
         dispatch({ type: GET_TEMPERS, payload });
     }
@@ -41,7 +41,7 @@ export function getTemperaments() {
 
 export function createDog(newDog) {
     return async function (dispatch) {
-        let breed = await axios.post('http://localhost:3001/dogs', newDog);
+        let breed = await axios.post('/dogs', newDog);
         let payload = breed.data;
         dispatch({ type: CREATE_BREED, payload});
     }

@@ -15,7 +15,7 @@ const BreedDetail = (props) => {
     let { id } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/dogs/${id}`)
+        axios.get(`/dogs/${id}`)
             .then(response => {
                 setBreed(response.data.data[0]);
                 setLocalStatus(response.data.status)
