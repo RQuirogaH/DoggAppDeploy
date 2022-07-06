@@ -5,6 +5,8 @@ import s from './BreedDetail.module.css';
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import gif from '../../Assets/loading2.gif'
+
 
 const BreedDetail = (props) => {
 
@@ -31,7 +33,10 @@ const BreedDetail = (props) => {
             <NavBar />
             <div className={s.detail}>
                 {
-                    localStatus === 'LOADING' && <div>Estoy cargando, esperame</div>
+                    localStatus === 'LOADING' &&
+                    <div className={s.message}>
+                        <img src={gif} alt="loading" className={s.gif} />
+                    </div>
                 }
                 {
                     localStatus === 'OK' &&

@@ -141,7 +141,7 @@ const Form = () => {
             error.isOkay = false
         }
         let regexURL = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
-        if (!regexURL.exec(input.url)) {
+        if (input.url && !regexURL.exec(input.url)) {
             error.url = 'The URL is invalid'
             error.isOkay = false
         }

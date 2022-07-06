@@ -5,12 +5,13 @@ import collar from '../../Assets/collar1.png'
 
 import s from './NavBar.module.css'
 import { useDispatch } from "react-redux";
-import { getBreeds } from "../../Redux/actions";
+import { getBreeds, setStatus } from "../../Redux/actions";
 
 const NavBar = () => {
 
     const dispatch = useDispatch();
     const getAllBreeds = () => {
+        dispatch(setStatus('LOADING'))
         dispatch(getBreeds())
     }
 

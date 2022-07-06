@@ -39,9 +39,7 @@ const Pagination = () => {
                     <img src={prev} alt="back" id='back' className={s.back}/>
                 </button>
                 <label>
-                    <span>{pageConfig.current}</span>
-                    <span> de </span>
-                    <span>{pageConfig.max}</span>
+                    <span>{`${pageConfig.current} / ${pageConfig.max}`}</span>
                 </label>
                 <button type='button' id='next' className={pageConfig.current === pageConfig.max ? `${s.hide}` : `${s.show}`}>
                     <img src={next} alt="next" id='next' className={s.next}/>

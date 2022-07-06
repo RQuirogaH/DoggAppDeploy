@@ -6,7 +6,7 @@
     text-decoration: none;
 
     box-sizing: border-box;
-    width: 23vw;
+    width: 21vw;
     margin: 10px;
     padding: 1vw;
 
@@ -38,7 +38,7 @@
 
 .img {
     height: 35vh;
-    width: 21vw;
+    width: 19vw;
     border-radius: 10px;
     margin: 0px;
 }
