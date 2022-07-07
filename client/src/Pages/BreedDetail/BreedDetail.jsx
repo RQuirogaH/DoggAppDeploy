@@ -69,7 +69,7 @@ const BreedDetail = (props) => {
                 {
                     localStatus === 'NO DATA' &&
                     <div className={s.message}>
-                        Raza no encontrada
+                        Breed not found
                         <Link to='/home'>
                             <button className={s.boton}>
                                 Back
