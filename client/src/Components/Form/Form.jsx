@@ -3,7 +3,7 @@ import s from './Form.module.css'
 
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTemperaments, createDog, setStatus, getBreeds } from "../../Redux/actions";
+import { getTemperaments, createDog, setStatus, getBreeds, resetFilter } from "../../Redux/actions";
 import Card from "../Card/Card";
 import Modal from "../Modal/Modal";
 
@@ -22,7 +22,9 @@ const Form = () => {
 
     useEffect(() => {
         return () => {
+            dispatch(setStatus('LOADING'))
             dispatch(getBreeds())
+            dispatch(resetFilter())
         };
     },[])
 
