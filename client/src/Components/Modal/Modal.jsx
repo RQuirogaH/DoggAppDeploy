@@ -49,7 +49,7 @@ const Modal = ({ status }) => {
                     <div>
                         <Link to='/home' onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Return home</button></Link>
                         <Link to='#' onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Edit</button></Link>
-                        <Link to={`/breed/${newBreed}`} onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Breed details</button></Link>
+                        <Link to={`/breed/${newBreed.id}`} onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Breed details</button></Link>
                     </div>
                 </div>
             </div>
