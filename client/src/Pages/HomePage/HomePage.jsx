@@ -65,7 +65,7 @@ const HomePage = () => {
             {
                 status === 'OK' && breeds.length &&
                 <div>
-                    <Pagination />
+                    
                     <div className={s.breeds}>
                         {
                             breedsToShow(breeds).map(b => <Card
@@ -78,6 +78,7 @@ const HomePage = () => {
                             />)
                         }
                     </div>
+                    <Pagination />
                 </div>
             }
             {

@@ -1,9 +1,9 @@
 @import url('../../vars.css');
 
-.form{
+.form {
     position: relative;
     box-sizing: border-box;
-    width: 20vw;
+    width: 22vw;
     height: 6vh;
 
     display: flex;
@@ -17,13 +17,16 @@
 
     position: absolute;
     top: 2vh;
-    left: 40vw;
-
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 
 .input {
     box-sizing: border-box;
-    width: 15vw;
+    width: 86%;
     margin: 0px;
     margin-left: 7px;
 
@@ -39,12 +42,12 @@
 .boton {
     background-color: transparent;
     cursor: pointer;
-    
+
     width: 25px;
     height: 25px;
     padding: 0px;
     margin: 0px;
-    
+
     display: flex;
     align-items: center;
 
@@ -61,4 +64,35 @@
     border: none;
     display: flex;
     align-items: center;
+}
+
+/* Responsive mobile */
+@media screen and (max-width: 600px) {
+    .form {
+        border: 1px var(--color_golden) solid;
+        position: relative;
+        box-sizing: border-box;
+        width: 50vw;
+        height: 5vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+    }
+
+    .input {
+        box-sizing: border-box;
+        width: 86%;
+        margin: 0px;
+        margin-left: 7px;
+    
+        background-color: transparent;
+        border: none;
+        color: var(--color_golden);
+        outline: none;
+    
+        font-size: 15px;
+        font-family: 'Exo', sans-serif;
+    }
 }

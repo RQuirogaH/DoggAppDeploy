@@ -16,3 +16,16 @@
     background-color: black;
     font-family: 'Exo', sans-serif;
 }
+
+/* Responsive mobile */
+@media screen and (max-width: 600px) {
+    .container > select {
+        width: 20vw;
+        font-size: 14px;
+    }
+
+    .container {
+        width: 20vw;
+        font-size: 14px;
+    }
+}

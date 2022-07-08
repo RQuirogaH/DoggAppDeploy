@@ -27,25 +27,26 @@ const Pagination = () => {
         if (e.target.id === 'last' && pageConfig.current !== pageConfig.max) {
             dispatch(setPage(pageConfig.max))
         }
+        window.scrollTo(0, 0)
     }
 
     return (
         <div className={s.container}>
             <form onClick={(e) => handleChangePage(e)}>
                 <button type='button' id='first' className={pageConfig.current === 1 ? `${s.hide}` : `${s.show}`}>
-                    <img src={first} alt="first" id='first' className={s.first}/>  
+                    <img src={first} alt="first" id='first' className={s.first} />
                 </button>
                 <button type='button' id='back' className={pageConfig.current === 1 ? `${s.hide}` : `${s.show}`}>
-                    <img src={prev} alt="back" id='back' className={s.back}/>
+                    <img src={prev} alt="back" id='back' className={s.back} />
                 </button>
                 <label>
                     <span>{`${pageConfig.current} / ${pageConfig.max}`}</span>
                 </label>
                 <button type='button' id='next' className={pageConfig.current === pageConfig.max ? `${s.hide}` : `${s.show}`}>
-                    <img src={next} alt="next" id='next' className={s.next}/>
+                    <img src={next} alt="next" id='next' className={s.next} />
                 </button>
                 <button type='button' id='last' className={pageConfig.current === pageConfig.max ? `${s.hide}` : `${s.show}`} >
-                    <img src={last} alt="last" id='last' className={s.last}/>
+                    <img src={last} alt="last" id='last' className={s.last} />
                 </button>
             </form>
         </div>

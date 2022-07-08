@@ -1,7 +1,7 @@
 @import url('../../vars.css');
 
 .homeIcon {
-    width: 50px;
+    width: 7vh;
 }
 
 .NavBar {
@@ -29,6 +29,6 @@
 }
 
 .collarIcon {
-    width: 40px;
+    width: 5vh;
     padding-right: 10px;
 }
