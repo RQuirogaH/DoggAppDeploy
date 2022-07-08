@@ -24,6 +24,8 @@
     background: var(--color_grey);
     color: var(--color_font);
     color: var(--color_font);
+
+    outline: none;
 }
 
 .container:hover {
@@ -49,6 +51,12 @@
     font-size: 2rem;
     text-align: center;
     max-width: 95%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 }
 
 .breedName h3 {

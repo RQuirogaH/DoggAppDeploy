@@ -20,7 +20,6 @@
     border-radius: 20px;
     display: flex;
     justify-content: space-around;
-
 }
 
 /* css del preview */
@@ -108,6 +107,7 @@
 .temperaments {
     width: 100%;
     justify-content: center;
+    outline: none
 }
 
 .temperaments button {
@@ -122,7 +122,7 @@
 }
 
 .temperaments button:hover {
-    background-color: rgba(243, 56, 56, 0.6);
+    background-color: rgba(255, 0, 0, 0.8);
     border: 1px solid red;
     border-radius: 20px;
     padding: 10px;
@@ -137,11 +137,12 @@
     border: none;
     font-size: 15px;
     color: var(--color_font);
+    outline: none;
 }
 
 .send {
-    background-color: var(--color_golden);
-    color: var(--color_grey);
+    background-color: var(--color_grey);
+    color: var(--color_font);
     cursor: pointer;
     padding: 10px;
     font-weight: bold;
@@ -150,12 +151,13 @@
     align-self: center;
     font-family: 'Exo', sans-serif;
     font-size: 18px;
+    outline: none;
 }
 
 .sendDisabled {
     background-color: var(--color_grey);
     color: gray;
-    cursor: pointer;
+    cursor:pointer;
     padding: 10px;
     font-weight: bold;
     border: 2px gray solid;
@@ -163,9 +165,11 @@
     align-self: center;
     font-family: 'Exo', sans-serif;
     font-size: 18px;
+    outline: none;
 }
 
 .send:hover {
-    background-color: var(--color_grey);
-    color: var(--color_font);
+    background-color: var(--color_golden);
+    color: var(--color_grey);
+    outline: none;
 }

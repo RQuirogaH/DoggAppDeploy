@@ -26,7 +26,7 @@ const Form = () => {
             dispatch(getBreeds())
             dispatch(resetFilter())
         };
-    },[])
+    }, [])
 
     const [input, setInput] = useState({
         name: '',
@@ -53,17 +53,24 @@ const Form = () => {
     })
 
     const handleSubmit = (e) => {
-        let newDog = {
-            name: input.name,
-            height: input.height_max ? `${input.height_min} - ${input.height_max}` : `${input.height_min}`,
-            weight: input.weight_max ? `${input.weight_min} - ${input.weight_max}` : `${input.weight_min}`,
-            life_span: input.life_max ? `${input.life_min} - ${input.life_max}` : `${input.life_min}`,
-            temperaments: [...input.temperaments],
-            img: input.url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBUt-yCC6NE1bIScT5KXBvOxLv-VDQ3sWK3w&usqp=CAU"
-        }
         e.preventDefault();
-        dispatch(setStatus('CREATING'))
-        dispatch(createDog(newDog))
+        if(!error.isOkay) {
+            setError(validation({
+                ...input
+            }))
+        }
+        if(error.isOkay) {
+            let newDog = {
+                name: input.name,
+                height: input.height_max ? `${input.height_min} - ${input.height_max}` : `${input.height_min}`,
+                weight: input.weight_max ? `${input.weight_min} - ${input.weight_max}` : `${input.weight_min}`,
+                life_span: input.life_max ? `${input.life_min} - ${input.life_max}` : `${input.life_min}`,
+                temperaments: [...input.temperaments],
+                img: input.url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBUt-yCC6NE1bIScT5KXBvOxLv-VDQ3sWK3w&usqp=CAU"
+            }
+            dispatch(setStatus('CREATING'))
+            dispatch(createDog(newDog))
+        }
     }
 
     const handleChange = (e) => {
@@ -79,26 +86,44 @@ const Form = () => {
 
     const handleChangeNumber = (e) => {
         let inputText = e.target.value.replace(/\D/g, '')
-        setInput({
-            ...input,
-            [e.target.id]: inputText
-        })
-        setError(validation({
-            ...input,
-            [e.target.id]: inputText
-        }))
+
+        //Allow the input to be null
+        if (Number(inputText) === 0) {
+            setInput({
+                ...input,
+                [e.target.id]: ''
+            })
+            setError(validation({
+                ...input,
+                [e.target.id]: ''
+            }))
+            return
+        }
+
+        if (Number(inputText) < 1000) {
+            setInput({
+                ...input,
+                [e.target.id]: Number(inputText)
+            })
+            setError(validation({
+                ...input,
+                [e.target.id]: Number(inputText)
+            }))
+        }
     }
 
     const handleChangeText = (e) => {
         let inputText = e.target.value.replace(/[^a-z\s]/gi, '');
-        setInput({
-            ...input,
-            [e.target.id]: inputText
-        })
-        setError(validation({
-            ...input,
-            [e.target.id]: inputText
-        }))
+        if (inputText.length < 50) {
+            setInput({
+                ...input,
+                [e.target.id]: inputText
+            })
+            setError(validation({
+                ...input,
+                [e.target.id]: inputText
+            }))
+        }
     }
 
     const handleSetTemperaments = (e) => {
@@ -120,34 +145,52 @@ const Form = () => {
     const validation = (input) => {
         const error = {}
         error.isOkay = true
+
+        //Validations for name
         if (!input.name.trim()) {
             error.name = 'Breed name is required'
             error.isOkay = false
         }
-        if (!input.height_min) {
-            error.height_min = 'Min height is required'
-            error.isOkay = false
+        if (input.name.trim()) {
+            let words = input.name.trim().length
+            if (words < 3) {
+                error.name = 'Name must have at least 3 characters'
+                error.isOkay = false
+            }
         }
-        if (input.height_max && Number(input.height_max) < Number(input.height_min)) {
-            error.height_max = 'Max height must to be greater than min'
-            error.isOkay = false
-        }
+
+        //validations for weight
         if (!input.weight_min) {
             error.weight_min = 'Min weight is required'
             error.isOkay = false
         }
-        if (input.weight_max && Number(input.weight_max) < Number(input.weight_min)) {
+        if (input.weight_max !== '' && (input.weight_max < input.weight_min)) {
             error.weight_max = 'Max weight must to be greater than min'
             error.isOkay = false
         }
+
+        //validations for height
+        if (!input.height_min) {
+            error.height_min = 'Min height is required'
+            error.isOkay = false
+        }
+
+        if (input.height_max !== '' && (input.height_max < input.height_min)) {
+            error.height_max = 'Max height must to be greater than min'
+            error.isOkay = false
+        }
+
+        //validations for life_span
         if (!input.life_min) {
             error.life_min = 'Min life span is required'
             error.isOkay = false
         }
-        if (input.life_max && Number(input.life_max) < Number(input.life_min)) {
+        if (input.life_max !== '' && (input.life_max < input.life_min)) {
             error.life_max = 'Max life span must to be greater than min'
             error.isOkay = false
         }
+
+        //validations for URl
         let regexURL = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
         if (input.url && !regexURL.exec(input.url)) {
             error.url = 'The URL is invalid'
@@ -163,7 +206,7 @@ const Form = () => {
                 <form onSubmit={(e) => handleSubmit(e)} className={s.formulario}>
 
                     <div>
-                        <label htmlFor='name' className={s.label}>Name</label>
+                        <label htmlFor='name' className={s.label}>Name*</label>
                         <input type="text" id="name" onChange={(e) => handleChangeText(e)} value={input.name} autoComplete='off' className={s.textInput} />
                         <div className={s.errorDiv}>
                             {error.name && <span className={s.error}>{error.name}</span>}
@@ -171,7 +214,7 @@ const Form = () => {
                     </div>
 
                     <div>
-                        <label htmlFor='weight_min' className={s.label}>Weight</label>
+                        <label htmlFor='weight_min' className={s.label}>Weight*</label>
                         <div className={s.inputContainer}>
                             <input type='text' id="weight_min" onChange={(e) => handleChangeNumber(e)} value={input.weight_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
                             <label htmlFor='weight_min' className={s.unit}> kg</label>
@@ -188,7 +231,7 @@ const Form = () => {
                     </div>
 
                     <div>
-                        <label htmlFor='height_min' className={s.label}>Height</label>
+                        <label htmlFor='height_min' className={s.label}>Height*</label>
                         <div className={s.inputContainer}>
                             <input type='text' id="height_min" onChange={(e) => handleChangeNumber(e)} value={input.height_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
                             <label htmlFor='height_min' className={s.unit}> cm</label>
@@ -205,7 +248,7 @@ const Form = () => {
                     </div>
 
                     <div>
-                        <label htmlFor='life_min' className={s.label}>Life span</label>
+                        <label htmlFor='life_min' className={s.label}>Life span*</label>
                         <div className={s.inputContainer}>
                             <input type="text" id="life_min" onChange={(e) => handleChangeNumber(e)} value={input.life_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
                             <label htmlFor='life_min' className={s.unit}> yr</label>
@@ -248,12 +291,7 @@ const Form = () => {
                             </div>)
                         }
                     </div>
-
-                    {
-                        error.isOkay
-                            ? <button type="submit" className={s.send}>Create</button>
-                            : <button type="submit" disabled className={s.sendDisabled}>Create</button>
-                    }
+                    <button type="submit" className={error.isOkay ? s.send : s.sendDisabled}>Create</button>
 
                 </form>
                 <div className={s.card}>
