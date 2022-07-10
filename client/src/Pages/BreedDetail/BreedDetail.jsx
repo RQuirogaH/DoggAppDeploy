@@ -28,7 +28,7 @@ const BreedDetail = (props) => {
 
     }, [id])
 
-    const handleDelete = (e) => {
+/*     const handleDelete = (e) => {
         axios.delete(`http://localhost:3001/dogs/delete/${id}`)
             .then(response => {
                 setLocalStatus(response.data.status)
@@ -37,7 +37,7 @@ const BreedDetail = (props) => {
                 dispatch(setStatus('LOADING'))
                 dispatch(getBreeds())
             })
-    }
+    } */
 
     const handleError = (e) => {
         e.target.onerror = null;
@@ -79,14 +79,14 @@ const BreedDetail = (props) => {
                                     Back
                                 </button>
                             </Link>
-                            {
+{/*                             {
                                 id.includes('-') &&
                                 <Link to='#'>
                                     <button className={s.botonDelete} onClick={(e) => handleDelete(e)}>
                                         Delete
                                     </button>
                                 </Link>
-                            }
+                            } */}
                         </section>
                     </div>
                 }
