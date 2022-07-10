@@ -6,6 +6,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import gif from '../../Assets/loading2.gif'
+import { useDispatch } from "react-redux";
+import { getBreeds,setStatus } from "../../Redux/actions";
+
 
 
 const BreedDetail = (props) => {
@@ -13,15 +16,28 @@ const BreedDetail = (props) => {
     let [breed, setBreed] = useState({})
     let [localStatus, setLocalStatus] = useState('LOADING')
     let { id } = useParams();
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
-        axios.get(`/dogs/${id}`)
+        axios.get(`http://localhost:3001/dogs/${id}`)
             .then(response => {
                 setBreed(response.data.data[0]);
                 setLocalStatus(response.data.status)
             })
 
     }, [id])
+
+    const handleDelete = (e) => {
+        axios.delete(`http://localhost:3001/dogs/delete/${id}`)
+            .then(response => {
+                setLocalStatus(response.data.status)
+            })
+            .then(response => {
+                dispatch(setStatus('LOADING'))
+                dispatch(getBreeds())
+            })
+    }
 
     const handleError = (e) => {
         e.target.onerror = null;
@@ -63,6 +79,14 @@ const BreedDetail = (props) => {
                                     Back
                                 </button>
                             </Link>
+                            {
+                                id.includes('-') &&
+                                <Link to='#'>
+                                    <button className={s.botonDelete} onClick={(e) => handleDelete(e)}>
+                                        Delete
+                                    </button>
+                                </Link>
+                            }
                         </section>
                     </div>
                 }
@@ -70,6 +94,28 @@ const BreedDetail = (props) => {
                     localStatus === 'NO DATA' &&
                     <div className={s.message}>
                         Breed not found
+                        <Link to='/home'>
+                            <button className={s.boton}>
+                                Back
+                            </button>
+                        </Link>
+                    </div>
+                }
+                {
+                    localStatus === 'DELETED' &&
+                    <div className={s.message}>
+                        The breed was deleted
+                        <Link to='/home'>
+                            <button className={s.boton}>
+                                Back
+                            </button>
+                        </Link>
+                    </div>
+                }
+                {
+                    localStatus === 'ERROR' &&
+                    <div className={s.message}>
+                        An erro has ocurred, try again
                         <Link to='/home'>
                             <button className={s.boton}>
                                 Back

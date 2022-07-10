@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo&display=swap');
 
 :root {
     --font_cursive: 'Dancing Script', cursive;
+    --font_right: 'Exo', sans-serif;
     --color_golden: rgb(218, 165, 32);
     --color_grey: rgba(27, 27, 27, 0.95);
     --color_font: #EADEDE

@@ -21,7 +21,7 @@ let dtoDB = (data) => {
             id: b.id,
             name: b.name,
             weight: b.weight,
-            height: b.weight,
+            height: b.height,
             life_span: b.life_span,
             temperament: b.temperaments.map(e => e.name),
             img: b.img

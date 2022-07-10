@@ -1,19 +1,12 @@
 @import url('../../vars.css');
 
-/* .bg {
-    background-image: url('../../Assets/bg_landing.jpg');
-    background-repeat: no-repeat;
-    background-size:auto;
-    min-height: 100vh;
-    min-width: 100vw;
-}
- */
 .bg {
     position: relative;
     min-height: 100vh;
     background: transparent;
     margin: 0px;
     padding: 0px;
+    background-color: black;
 }
 
 .bg::before {
@@ -27,7 +20,7 @@
     background-attachment: fixed;
     background-size: cover;
     background-repeat: repeat;
-    background-position: center;
+    background-position: left;
     opacity: 1;
 }
 
@@ -41,6 +34,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 30px;
     padding-left: 30vw;
 }
 
@@ -51,13 +45,15 @@
     padding: 0px;
     margin: 0px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .boton {
     background-color: transparent;
     margin-top: 10px;
+    min-width: 150px;
     width: 15vw;
-    height: 10vh;
+    height: 80px;
     text-align: center;
     font-size: 30px;
     color: rgb(255, 255, 255);
@@ -65,9 +61,22 @@
     border-radius: 20px;
     cursor: pointer;
     transition: 0.5s;
+    font-family: var(--font_right);
 }
 
 .boton:hover{
     border: none;
-    background-color: rgba(218, 165, 32, 0.616);
+    background-color: var(--color_golden);
+    color: black;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .bg::before {
+        opacity: 0.4;
+    }
+
+    .main {
+        padding: 5vw;
+    }
 }

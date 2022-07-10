@@ -6,7 +6,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color:rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,22 +24,28 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 .container p {
     margin-bottom: 30px;
 }
 
+.container img {
+    object-fit: cover;
+}
+
 .gif {
     width: 25vw;
     position: absolute;
-    top: 25px;
+    top: 10vh;
 }
 
 .title {
     position: absolute;
-    top:10px;
+    top: 10px;
     font-size: 30px;
+    padding: 10px;
 }
 
 .newDogBG {
@@ -56,6 +62,7 @@
 .newDog h2 {
     font-size: 30px;
     margin-bottom: 40px;
+    padding: 10px;
 }
 
 .button {
@@ -66,9 +73,10 @@
 .button button {
     cursor: pointer;
     padding: 12px;
+    margin: 10px;
     border-radius: 10px;
     border: 2px solid var(--color_grey);
-    background-color: transparent;
+    background-color: #EADEDE;
     color: var(--color_grey);
     font-weight: bold;
 }
@@ -76,4 +84,28 @@
 .button button:hover {
     background-color: var(--color_grey);
     color: #EADEDE;
+}
+
+.buttonsDiv button {
+    width: 120px;
+}
+
+/* Responsive mobile */
+@media screen and (max-width: 600px) {
+    .container {
+        height: 50vh;
+        min-height: 40vh;
+        width: 80vw;
+    }
+
+    .button {
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    .gif {
+        width: 40vw;
+        position: absolute;
+        top: 20vh;
+    }
 }

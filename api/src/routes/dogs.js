@@ -79,7 +79,6 @@ router.get('/:idRaza', async (req, res) => {
 router.post('/', async (req, res) => {
     const { name, height, weight, life_span, temperaments, img } = req.body;
     try {
-        console.log(name, height, weight, life_span, temperaments, img)
         let [newBreed, created] = await Dog.findOrCreate({
             where: { name: name },
             defaults: {
@@ -123,6 +122,22 @@ router.post('/', async (req, res) => {
         res.json({ status: 'ERROR', data: [] })
     }
 
+})
+
+router.delete('/delete/:id', async (req, res) => {
+    const id = req.params.id
+
+    try {
+        await Dog.destroy({
+            where: {
+                id: id
+            }
+        });
+        res.json({ status: 'DELETED', data: [] })
+    }
+    catch (err) {
+        res.json({ status: 'ERROR', data: [] })
+    }
 })
 
 module.exports = router;

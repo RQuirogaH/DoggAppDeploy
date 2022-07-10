@@ -103,8 +103,8 @@
 .boton {
     background-color: var(--color_golden);
     margin-top: 10px;
-    width: 8vw;
-    height: 5vh;
+    width: 100px;
+    height: 30px;
     text-align: center;
     font-size: 15px;
     color: rgb(0, 0, 0);
@@ -116,7 +116,27 @@
 
 .boton:hover{
     border: none;
-    background-color: rgba(218, 165, 32, 0.616);
+    background-color: rgb(218, 165, 32);
+}
+
+.botonDelete {
+    background-color: transparent;
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    font-size: 15px;
+    color: red;
+    border: 2px red solid;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.botonDelete:hover{
+    border: none;
+    background-color: red;
+    color: black;
 }
 
 .message {
@@ -134,7 +154,7 @@
 }
 
 /* Responsive mobile */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     .breed {
         display: flex;
         flex-direction: column;
@@ -163,7 +183,12 @@
     }
 
     .boton {
-        width: 40vw;
-        height: 6vh;
+        width: 150px;
+        height: 40px;
+    }
+    
+    .botonDelete {
+        width: 150px;
+        height: 40px;
     }
 }

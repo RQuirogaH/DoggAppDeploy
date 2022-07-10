@@ -37,6 +37,10 @@
     margin: 5px;
 }
 
+.cardCreate {
+    transform: scale(0.8);
+}
+
 
 .img {
     /*     height: 35vh; */
@@ -100,6 +104,25 @@
         width: 100%;
         height: 50vw;
         border-radius: 2vw;
+        margin: 0px;
+    }
+}
+
+/* Responsive tablet */
+@media screen and (max-width: 1280px) and (min-width: 600px) {
+    .container {
+        box-sizing: border-box;
+        width: 300px;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .img {
+        /*     height: 35vh; */
+        box-sizing: border-box;
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
         margin: 0px;
     }
 }

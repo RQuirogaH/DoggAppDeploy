@@ -13,6 +13,7 @@
     left: 0px;
     bottom: 0px;
     right: 0px;
+    background-color: black;
     background-image: url('../../Assets/bg_main4.jpg');
     background-attachment: fixed;
     background-size: cover;
@@ -29,11 +30,13 @@
 }
 
 .message {
-    height: 60vh;
+    height: 45vh;
     display: flex;
+    padding: 20px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     position: relative;
     color: white;
 }
@@ -41,7 +44,7 @@
 .boton {
     background-color: var(--color_golden);
     margin-top: 10px;
-    width: 8vw;
+    width: 150px;
     height: 5vh;
     text-align: center;
     font-size: 15px;
@@ -60,7 +63,7 @@
 .boton2 {
     background-color: var(--color_golden);
     margin-top: 10px;
-    width: 10vw;
+    width: 150px;
     height: 6vh;
     text-align: center;
     font-size: 15px;
@@ -78,4 +81,5 @@
 
 .gif {
     width: 25vw;
+
 }

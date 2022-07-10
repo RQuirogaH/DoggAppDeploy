@@ -46,7 +46,7 @@ const Modal = ({ status }) => {
                 <div className={s.container}>
                     <h2>A breed with that name already exist</h2>
                     <p>Try with another name</p>
-                    <div>
+                    <div className={s.buttonsDiv}>
                         <Link to='/home' onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Return home</button></Link>
                         <Link to='#' onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Edit</button></Link>
                         <Link to={`/breed/${newBreed.id}`} onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Breed details</button></Link>

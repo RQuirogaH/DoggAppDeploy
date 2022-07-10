@@ -53,13 +53,14 @@ const Form = () => {
     })
 
     const handleSubmit = (e) => {
+        console.log('hola')
         e.preventDefault();
-        if(!error.isOkay) {
+        if (!error.isOkay) {
             setError(validation({
                 ...input
             }))
         }
-        if(error.isOkay) {
+        if (error.isOkay) {
             let newDog = {
                 name: input.name,
                 height: input.height_max ? `${input.height_min} - ${input.height_max}` : `${input.height_min}`,
@@ -202,99 +203,112 @@ const Form = () => {
 
     return (
         <div className={s.container}>
-            <section>
-                <form onSubmit={(e) => handleSubmit(e)} className={s.formulario}>
-
-                    <div>
-                        <label htmlFor='name' className={s.label}>Name*</label>
-                        <input type="text" id="name" onChange={(e) => handleChangeText(e)} value={input.name} autoComplete='off' className={s.textInput} />
+            <section className={s.card}>
+                <div className={s.sectionForm}>
+                    <form className={s.formulario}>
+                        <div>
+                            <label htmlFor='name'>Name*</label>
+                            <div>
+                                <input type="text" id="name" onChange={(e) => handleChangeText(e)} value={input.name} autoComplete='off' className={s.textInput} />
+                            </div>
+                        </div>
                         <div className={s.errorDiv}>
                             {error.name && <span className={s.error}>{error.name}</span>}
                         </div>
-                    </div>
 
-                    <div>
-                        <label htmlFor='weight_min' className={s.label}>Weight*</label>
-                        <div className={s.inputContainer}>
-                            <input type='text' id="weight_min" onChange={(e) => handleChangeNumber(e)} value={input.weight_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
-                            <label htmlFor='weight_min' className={s.unit}> kg</label>
-                        </div>
-                        <label htmlFor='weight_max' className={s.label}> - </label>
-                        <div className={s.inputContainer}>
-                            <input type='text' id="weight_max" onChange={(e) => handleChangeNumber(e)} value={input.weight_max} autoComplete='off' placeholder="max" className={s.numberInput} />
-                            <label htmlFor='weight_max' className={s.unit}> kg</label>
+                        <div>
+                            <label htmlFor='weight_min'>Weight*</label>
+                            <div>
+                                <div className={s.inputContainer}>
+                                    <input type='text' id="weight_min" onChange={(e) => handleChangeNumber(e)} value={input.weight_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
+                                    <label htmlFor='weight_min' className={s.unit}> kg</label>
+                                </div>
+                                <label htmlFor='weight_max' className={s.label}> - </label>
+                                <div className={s.inputContainer}>
+                                    <input type='text' id="weight_max" onChange={(e) => handleChangeNumber(e)} value={input.weight_max} autoComplete='off' placeholder="max" className={s.numberInput} />
+                                    <label htmlFor='weight_max' className={s.unit}> kg</label>
+                                </div>
+                            </div>
                         </div>
                         <div className={s.errorDiv}>
                             {error.weight_min && <span className={s.error}>{error.weight_min}</span>}
                             {error.weight_max && <span className={s.error}>{error.weight_max}</span>}
                         </div>
-                    </div>
 
-                    <div>
-                        <label htmlFor='height_min' className={s.label}>Height*</label>
-                        <div className={s.inputContainer}>
-                            <input type='text' id="height_min" onChange={(e) => handleChangeNumber(e)} value={input.height_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
-                            <label htmlFor='height_min' className={s.unit}> cm</label>
-                        </div>
-                        <label htmlFor='height_max' className={s.label}> - </label>
-                        <div className={s.inputContainer}>
-                            <input type='text' id="height_max" onChange={(e) => handleChangeNumber(e)} value={input.height_max} autoComplete='off' placeholder="max" className={s.numberInput} />
-                            <label htmlFor='height_max' className={s.unit}> cm</label>
+
+                        <div>
+                            <label htmlFor='height_min'>Height*</label>
+                            <div>
+                                <div className={s.inputContainer}>
+                                    <input type='text' id="height_min" onChange={(e) => handleChangeNumber(e)} value={input.height_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
+                                    <label htmlFor='height_min' className={s.unit}> cm</label>
+                                </div>
+                                <label htmlFor='height_max' className={s.label}> - </label>
+                                <div className={s.inputContainer}>
+                                    <input type='text' id="height_max" onChange={(e) => handleChangeNumber(e)} value={input.height_max} autoComplete='off' placeholder="max" className={s.numberInput} />
+                                    <label htmlFor='height_max' className={s.unit}> cm</label>
+                                </div>
+                            </div>
                         </div>
                         <div className={s.errorDiv}>
                             {error.height_min && <span className={s.error}>{error.height_min}</span>}
                             {error.height_max && <span className={s.error}>{error.height_max}</span>}
                         </div>
-                    </div>
 
-                    <div>
-                        <label htmlFor='life_min' className={s.label}>Life span*</label>
-                        <div className={s.inputContainer}>
-                            <input type="text" id="life_min" onChange={(e) => handleChangeNumber(e)} value={input.life_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
-                            <label htmlFor='life_min' className={s.unit}> yr</label>
-                        </div>
-                        <label htmlFor='leight_max' className={s.label}> - </label>
-                        <div className={s.inputContainer}>
-                            <input type="text" id="life_max" onChange={(e) => handleChangeNumber(e)} value={input.life_max} autoComplete='off' placeholder="max" className={s.numberInput} />
-                            <label htmlFor='life_max' className={s.unit}> yr</label>
+
+                        <div>
+                            <label htmlFor='life_min'>Life span*</label>
+                            <div>
+                                <div className={s.inputContainer}>
+                                    <input type="text" id="life_min" onChange={(e) => handleChangeNumber(e)} value={input.life_min} autoComplete='off' placeholder="min*" className={s.numberInput} />
+                                    <label htmlFor='life_min' className={s.unit}> yr</label>
+                                </div>
+                                <label htmlFor='leight_max' className={s.label}> - </label>
+                                <div className={s.inputContainer}>
+                                    <input type="text" id="life_max" onChange={(e) => handleChangeNumber(e)} value={input.life_max} autoComplete='off' placeholder="max" className={s.numberInput} />
+                                    <label htmlFor='life_max' className={s.unit}> yr</label>
+                                </div>
+                            </div>
                         </div>
                         <div className={s.errorDiv}>
                             {error.life_min && <span className={s.error}>{error.life_min}</span>}
                             {error.life_max && <span className={s.error}>{error.life_max}</span>}
                         </div>
-                    </div>
 
-                    <div>
-                        <label htmlFor='url' className={s.label} >Image URL</label>
-                        <input type="text" id="url" onChange={(e) => handleChange(e)} value={input.url} autoComplete='off' className={s.textInput} />
+                        <div>
+                            <label htmlFor='url'>Image URL</label>
+                            <div>
+                                <input type="text" id="url" onChange={(e) => handleChange(e)} value={input.url} autoComplete='off' className={s.textInput} />
+                            </div>
+                        </div>
                         <div className={s.errorDiv}>
                             {error.url && <span className={s.error}>{error.url}</span>}
                         </div>
-                    </div>
 
-                    <div>
-                        <label htmlFor="temperaments" className={s.label}>Temperaments</label>
-                        <select defaultValue='Select_temperaments' name="temperaments" id="temperaments" onChange={(e) => handleSetTemperaments(e)} className={s.dropList}>
-                            <option disabled value="Select_temperaments">Select temperaments</option>
+                        <div>
+                            <label htmlFor="temperaments">Temperaments</label>
+                            <select defaultValue='Select_temperaments' name="temperaments" id="temperaments" onChange={(e) => handleSetTemperaments(e)} className={s.dropList}>
+                                <option disabled value="Select_temperaments">Select temperaments</option>
+                                {
+                                    temperaments.map(e => {
+                                        return <option key={e} value={`${e}`}>{e}</option>
+                                    })
+                                }
+                            </select>
+                        </div>
+                    </form>
+                    <div className={s.sectionAditionalInfo}>
+                        <div className={s.temperaments}>
                             {
-                                temperaments.map(e => {
-                                    return <option key={e} value={`${e}`}>{e}</option>
-                                })
+                                input.temperaments?.map((t, ind) => <div key={`temp${ind}`}>
+                                    <button type="button" value={t} onClick={(e) => handleDeleteTemp(e)}>{t}</button>
+                                </div>)
                             }
-                        </select>
+                        </div>
+                        <button type="submit" className={error.isOkay ? s.send : s.sendDisabled} onClick={(e) => handleSubmit(e)} >Create</button>
                     </div>
-
-                    <div className={s.temperaments}>
-                        {
-                            input.temperaments?.map((t, ind) => <div key={`temp${ind}`}>
-                                <button type="button" value={t} onClick={(e) => handleDeleteTemp(e)}>{t}</button>
-                            </div>)
-                        }
-                    </div>
-                    <button type="submit" className={error.isOkay ? s.send : s.sendDisabled}>Create</button>
-
-                </form>
-                <div className={s.card}>
+                </div>
+                <div className={s.cardBreed}>
                     <Card
                         key={`${input.name}_${input.url}`}
                         name={input.name}
@@ -305,6 +319,8 @@ const Form = () => {
                         isCreate={true}
                         img={input.url} />
                 </div>
+
+
             </section>
             {
                 (status === 'CREATING' || status === 'CREATED' || status === 'EXISTED' || status === 'ERROR')
