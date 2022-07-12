@@ -45,7 +45,7 @@
 .img {
     /*     height: 35vh; */
     width: 19vw;
-    height: 30vh;
+    height: 14vw;
     border-radius: 10px;
     margin: 0px;
 }
@@ -91,7 +91,7 @@
 }
 
 /* Responsive mobile */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 680px) {
     .container {
         box-sizing: border-box;
         width: 80vw;
@@ -109,7 +109,7 @@
 }
 
 /* Responsive tablet */
-@media screen and (max-width: 1280px) and (min-width: 600px) {
+@media screen and (max-width: 1280px) and (min-width: 680px) {
     .container {
         box-sizing: border-box;
         width: 300px;

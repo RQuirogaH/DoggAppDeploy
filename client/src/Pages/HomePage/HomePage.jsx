@@ -25,14 +25,17 @@ const HomePage = () => {
             dispatch(getBreeds())
             dispatch(getTemperaments())
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         dispatch(setPageConfig())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [breeds])
 
     useEffect(() => {
         dispatch(applyFilter())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters])
 
     const getAllBreeds = () => {

@@ -61,7 +61,7 @@ const Modal = ({ status }) => {
             <div className={s.overlay}>
                 <div className={s.container}>
                     <h2>An error has ocurred</h2>
-                    <p>Please try again if the error persists, please send an email to rafarqh@gmail.com</p>
+                    <p>Please try again with another image URL</p>
                     <Link to='/home' onClick={() => dispatch(setStatus('OK'))} className={s.button}><button>Return home</button></Link>
                 </div>
             </div>

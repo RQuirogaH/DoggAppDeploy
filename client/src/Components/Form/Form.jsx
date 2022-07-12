@@ -18,6 +18,7 @@ const Form = () => {
         if (!temperaments.length) {
             dispatch(getTemperaments())
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -26,6 +27,7 @@ const Form = () => {
             dispatch(getBreeds())
             dispatch(resetFilter())
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const [input, setInput] = useState({
@@ -53,7 +55,6 @@ const Form = () => {
     })
 
     const handleSubmit = (e) => {
-        console.log('hola')
         e.preventDefault();
         if (!error.isOkay) {
             setError(validation({
@@ -192,6 +193,7 @@ const Form = () => {
         }
 
         //validations for URl
+        // eslint-disable-next-line
         let regexURL = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
         if (input.url && !regexURL.exec(input.url)) {
             error.url = 'The URL is invalid'

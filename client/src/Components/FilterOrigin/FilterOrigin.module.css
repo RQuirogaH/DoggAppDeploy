@@ -18,7 +18,7 @@
 }
 
 /* Responsive mobile */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 680px) {
     .container > select {
         width: 20vw;
         font-size: 14px;

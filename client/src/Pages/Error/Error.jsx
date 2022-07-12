@@ -10,7 +10,7 @@ const Error = (props) => {
             <div className={s.main}>
                 <h1 className={s.title}>Page not found</h1>
                 <Link to='/home'>
-                    <button className={s.boton}>Go home</button>
+                    <button className={s.boton}>Home</button>
                 </Link>
             </div>
         </div>
