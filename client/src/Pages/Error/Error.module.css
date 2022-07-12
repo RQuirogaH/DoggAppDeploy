@@ -11,7 +11,7 @@
 .bg {
     position: relative;
     min-height: 100vh;
-    background: transparent;
+    background: black;
     margin: 0px;
     padding: 0px;
 }
@@ -28,7 +28,7 @@
     background-size: cover;
     background-repeat: repeat;
     background-position: center;
-    opacity: 0.2;
+    opacity: 0.4;
 }
 
 .main {
@@ -65,9 +65,11 @@
     border-radius: 20px;
     cursor: pointer;
     transition: 0.5s;
+    font-family: var(--font_right);
 }
 
-.boton:hover{
+.boton:hover {
     border: none;
-    background-color: rgba(218, 165, 32, 0.616);
+    background-color: goldenrod;
+    color: black;
 }
