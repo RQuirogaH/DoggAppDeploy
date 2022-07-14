@@ -87,7 +87,7 @@ const HomePage = () => {
             {
                 status === 'NO DATA' &&
                 <div className={s.message} >
-                    There is not breeds for your search, try with another breed
+                    There's no breed for your search, try with another breed
                     <button className={s.boton} onClick={() => getAllBreeds()}>
                         Back
                     </button>
@@ -96,7 +96,7 @@ const HomePage = () => {
             {
                 (status === 'OK' && !breeds.length) &&
                 <div className={s.message} >
-                    There is not breeds the filters
+                    There's no breed for this filters
                     <button className={s.boton2} onClick={() => resetFilters()}>
                         Reset filters
                     </button>
